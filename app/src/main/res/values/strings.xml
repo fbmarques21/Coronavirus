@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Coronavirus</string>
+    <string name="inserir_Nome">Name</string>
+    <string name="inserir_Datadenascimento">Date Of Birth</string>
+
+    <string-array name="genero">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="distrito">
+        <item>Aveiro</item>
+        <item>Beja</item>
+        <item>Bragança</item>
+        <item>Castelo Branco</item>
+        <item>Coimbra</item>
+        <item>Évora</item>
+        <item>Faro</item>
+        <item>Guarda</item>
+        <item>Leiria</item>
+        <item>Lisboa</item>
+        <item>Portalegre</item>
+        <item>Porto</item>
+        <item>Santarém</item>
+        <item>Setúbal</item>
+        <item>Viana do Castelo</item>
+        <item>Vila Real</item>
+        <item>Viseu</item>
+    </string-array>
+
+    <string-array name="estado">
+        <item>Deceased</item>
+        <item>Recovered</item>
+        <item>Infected</item>
+    </string-array>
 </resources>
