@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Coronavirus</string>
     <string name="inserir_Nome">Name</string>
-    <string name="inserir_Datadenascimento">Date Of Birth</string>
+    <string name="inserir_Datadenascimento">Year Of Birth</string>
 
     <string-array name="genero">
         <item>Male</item>
@@ -30,7 +30,18 @@
 
     <string-array name="estado">
         <item>Deceased</item>
-        <item>Recovered</item>
         <item>Infected</item>
+        <item>Recovered</item>
     </string-array>
+
+    <string name="inserir_Paciente">Patient</string>
+    <string name="inserir_Suspeito">Suspect</string>
+    <string name="consultar_Dados">Data</string>
+    <string name="text_Paciente">Insert Patient:</string>
+    <string name="texto_Suspeitos">Insert Suspect:</string>
+    <string name="texto_Consultar">Consult data from Portugal:</string>
+    <string name="texto_Sexo">Gender:</string>
+    <string name="texto_Distrito">District:</string>
+    <string name="texto_Estado">State:</string>
+    <string name="guardar_Paciente">Save</string>
 </resources>

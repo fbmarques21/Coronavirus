@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DisplayInserirSuspeito"></activity>
+        <activity android:name=".display_lista_paciente"></activity>
+        <activity android:name=".DisplayInserirSuspeito" />
         <activity android:name=".DisplayInserirPaciente" />
         <activity android:name=".MainActivity">
             <intent-filter>

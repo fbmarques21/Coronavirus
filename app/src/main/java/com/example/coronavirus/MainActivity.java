@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -19,7 +15,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void inserirPaciente(View view) {
-        Intent intentInserir = new Intent(this,DisplayInserirPaciente.class);
+        Intent intentInserir = new Intent(this, DisplayInserirPaciente.class);
         startActivity(intentInserir);
     }
 
@@ -27,5 +23,10 @@ public class MainActivity extends AppCompatActivity{
     public void inserirSuspeito(View view) {
         Intent intentInsert = new Intent(this,DisplayInserirSuspeito.class);
         startActivity(intentInsert);
+    }
+
+    public void consultarDados(View view) {
+        Intent intentDados = new Intent(this,display_lista_paciente.class);
+        startActivity(intentDados);
     }
 }
