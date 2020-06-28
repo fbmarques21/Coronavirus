@@ -3,6 +3,7 @@ package com.example.coronavirus;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,7 @@ public class DisplayInserirPaciente extends AppCompatActivity  implements Adapte
     private Button buttonGuardar;
     private boolean pacienteNovo = true;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +63,9 @@ public class DisplayInserirPaciente extends AppCompatActivity  implements Adapte
                 this.paciente.setAno(bundle.getString("ano"));
                 this.paciente.set_id(bundle.getInt("_id"));
 
-                this.editTextViewAno.setText(this.paciente.getAno());
                 this.editTextViewNome.setText(this.paciente.getNome());
+                this.editTextViewAno.setText(this.paciente.getAno());
+
             }
         }
     }
@@ -117,7 +120,7 @@ public class DisplayInserirPaciente extends AppCompatActivity  implements Adapte
      * @see #onCreateOptionsMenu
      */
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
@@ -141,6 +144,7 @@ public class DisplayInserirPaciente extends AppCompatActivity  implements Adapte
         }else{
             //update
             new DBPaciente(this).update(this.paciente);
+            Toast.makeText(this, "Paciente editado com sucesso", Toast.LENGTH_LONG).show();
         }
     }
 }

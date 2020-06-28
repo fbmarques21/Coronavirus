@@ -18,6 +18,7 @@ public class display_lista_paciente extends AppCompatActivity {
         setContentView(R.layout.activity_display_lista_paciente);
 
         this.listView = (ListView)findViewById(R.id.lista);
+
         ArrayList<Paciente> lista = new DBPaciente(this).procurar();
         PacienteAdapter pacienteAdapter = new PacienteAdapter(this, lista);
         this.listView.setAdapter(pacienteAdapter);

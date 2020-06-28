@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,28 +26,28 @@ public class PacienteAdapter extends ArrayAdapter<Paciente> {
         this.lista = lista;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         final Paciente itemPosicao = this.lista.get(position);
 
         convertView = LayoutInflater.from(this.context).inflate(R.layout.activity_display_item, null);
         final View layout = convertView;
 
         TextView textView = (TextView) convertView.findViewById(R.id.textViewNomeP);
-        textView.setText(itemPosicao.getNome());
+        textView.setText("Nome:" + itemPosicao.getNome());
 
         TextView textViewAno = (TextView) convertView.findViewById(R.id.textViewAnoP);
-        textView.setText(itemPosicao.getAno());
+        textViewAno.setText("Ano:" + itemPosicao.getAno());
 
-        Button button = (Button) convertView.findViewById(R.id.buttonEditar);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        Button buttonEdit = (Button) convertView.findViewById(R.id.buttonEditar);
+        buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,DisplayInserirPaciente.class);
+                intent.putExtra("_id",itemPosicao.get_id());
                 intent.putExtra("nome", itemPosicao.getNome());
                 intent.putExtra("ano",itemPosicao.getAno());
-                intent.putExtra("_id",itemPosicao.get_id());
                 context.startActivity(intent);
             }
         });

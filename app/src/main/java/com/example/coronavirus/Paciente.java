@@ -4,6 +4,7 @@ public class Paciente {
     private String nome;
     private String ano;
     private int _id;
+    private String genero;
 
     public String getNome() {
         return nome;
@@ -27,5 +28,13 @@ public class Paciente {
 
     public void set_id(int _id) {
         this._id = _id;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 }
