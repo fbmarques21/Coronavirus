@@ -53,27 +53,56 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         genero.setDescricao("Feminino");
         long idGenFem = tabelaGenero.insert(Converte.generoToContentValues(genero));
 
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+
+        Distrito distrito = new Distrito();
+        distrito.setDescricao("Guarda");
+        long idDisGua = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
+
+        distrito = new Distrito();
+        distrito.setDescricao("Lisboa");
+        long idDisLis = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
+
+        distrito = new Distrito();
+        distrito.setDescricao("Porto");
+        long idDisPor = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
+
+        BdTableEstado tabelaEstado = new BdTableEstado(db);
+
+        Estado estado = new Estado();
+        estado.setDescricao("Infetado");
+        long idEstInf = tabelaEstado.insert(Converte.estadoToContentValues(estado));
+
+        estado = new Estado();
+        estado.setDescricao("Recuperado");
+        long idEstRec = tabelaEstado.insert(Converte.estadoToContentValues(estado));
+
+        estado = new Estado();
+        estado.setDescricao("Morto");
+        long idEstMor = tabelaEstado.insert(Converte.estadoToContentValues(estado));
+
         BdTabelNomePaciente tabelaPaciente = new BdTabelNomePaciente(db);
 
-        Livro livro = new Livro();
-        livro.setTitulo("Lua vermelha");
-        livro.setIdCategoria(idCatAcao);
-        tabelaLivros.insert(Converte.livroToContentValues(livro));
+        Paciente paciente = new Paciente();
+        paciente.setNomePaciente("Francisco Marques");
+        paciente.setIdGenero(idGenMasc);
+        paciente.setIdDistrito(idDisGua);
+        paciente.setIdEstado(idEstInf);
+        tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
 
-        livro = new Livro();
-        livro.setTitulo("O sobrevivente");
-        livro.setIdCategoria(idCatAcao);
-        tabelaLivros.insert(Converte.livroToContentValues(livro));
+        paciente = new Paciente();
+        paciente.setNomePaciente("Ana");
+        paciente.setIdGenero(idGenFem);
+        paciente.setIdDistrito(idDisPor);
+        paciente.setIdEstado(idEstRec);
+        tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
 
-        livro = new Livro();
-        livro.setTitulo("O intruso");
-        livro.setIdCategoria(idCatTerror);
-        tabelaLivros.insert(Converte.livroToContentValues(livro));
-
-        livro = new Livro();
-        livro.setTitulo("O mistério do quarto secreto");
-        livro.setIdCategoria(idCatMisterio);
-        tabelaLivros.insert(Converte.livroToContentValues(livro));
+        paciente = new Paciente();
+        paciente.setNomePaciente("Fernando Eduardo");
+        paciente.setIdGenero(idGenMasc);
+        paciente.setIdDistrito(idDisLis);
+        paciente.setIdEstado(idEstMor);
+        tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
     }
 
     /**

@@ -21,6 +21,38 @@ public class Converte {
         return genero;
     }
 
+    public static ContentValues distritoToContentValues(Distrito distrito) {
+        ContentValues valores = new ContentValues();
+
+        valores.put(BdTableDistrito.CAMPO_DESCRICAO, distrito.getDescricao());
+
+        return valores;
+    }
+    public static Distrito contentValuesToDistrito(ContentValues valores) {
+        Distrito distrito = new Distrito();
+
+        distrito.setId(valores.getAsLong(BdTableDistrito._ID));
+        distrito.setDescricao(valores.getAsString(BdTableDistrito.CAMPO_DESCRICAO));
+
+        return distrito;
+    }
+
+    public static ContentValues estadoToContentValues(Estado estado) {
+        ContentValues valores = new ContentValues();
+
+        valores.put(BdTableEstado.CAMPO_DESCRICAO, estado.getDescricao());
+
+        return valores;
+    }
+    public static Estado contentValuesToEstado(ContentValues valores) {
+        Estado estado = new Estado();
+
+        estado.setId(valores.getAsLong(BdTableEstado._ID));
+        estado.setDescricao(valores.getAsString(BdTableEstado.CAMPO_DESCRICAO));
+
+        return estado;
+    }
+
     public static ContentValues pacienteToContentValues(Paciente paciente) {
         ContentValues valores = new ContentValues();
 

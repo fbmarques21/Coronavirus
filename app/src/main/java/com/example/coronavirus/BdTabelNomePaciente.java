@@ -45,9 +45,9 @@ public class BdTabelNomePaciente implements BaseColumns {
         db.execSQL("CREATE TABLE " + NOME_TABELA + "(" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CAMPO_NOME + " TEXT NOT NULL," +
-                CAMPO_ID_ANO_NASCIMENTO + " INTEGER NOT NULL," +
-                "FOREIGN KEY (" + CAMPO_ID_CATEGORIA + ") REFERENCES " +
-                BdTableCategorias.NOME_TABELA + "("+ BdTableCategorias._ID + ")" +
+                CAMPO_ID_GENERO + " INTEGER NOT NULL," +
+                "FOREIGN KEY (" + CAMPO_ID_GENERO + ") REFERENCES " +
+                BdTabelGenero.NOME_TABELA + "("+ BdTabelGenero._ID + ")" +
                 ")");
     }
 
@@ -93,15 +93,31 @@ public class BdTabelNomePaciente implements BaseColumns {
     public Cursor query(String[] columns, String selection,
                         String[] selectionArgs, String groupBy, String having,
                         String orderBy) {
-        if (!Arrays.asList(columns).contains(CAMPO_CATEGORIA_COMPLETO)) {
+        if (!Arrays.asList(columns).contains(CAMPO_ANO_NASCIMENTO_COMPLETO)) {
             return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
         }
+        if (!Arrays.asList(columns).contains(CAMPO_GENERO_COMPLETO)) {
+            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
+        }
+        if (!Arrays.asList(columns).contains(CAMPO_DISTRITO_COMPLETO)) {
+            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
+        }
+        if (!Arrays.asList(columns).contains(CAMPO_ESTADO_COMPLETO)) {
+            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
+        }
+
 
         String campos = TextUtils.join(",", columns);
 
         String sql = "SELECT " + campos;
-        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTableCategorias.NOME_TABELA;
-        sql += " ON " + CAMPO_ID_CATEGORIA_COMPLETO + "=" + BdTableCategorias.CAMPO_ID_COMPLETO;
+        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelAnoNascimento.NOME_TABELA;
+        sql += " ON " + CAMPO_ID_ANO_NASCIMENTO + "=" + BdTabelAnoNascimento.CAMPO_ID_COMPLETO;
+        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelGenero.NOME_TABELA;
+        sql += " ON " + CAMPO_ID_GENERO + "=" + BdTabelGenero.CAMPO_ID_COMPLETO;
+        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelAnoNascimento.NOME_TABELA;
+        sql += " ON " + CAMPO_ID_DISTRITO + "=" + BdTableDistrito.CAMPO_ID_COMPLETO;
+        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTableDistrito.NOME_TABELA;
+        sql += " ON " + CAMPO_ID_ESTADO + "=" + BdTableEstado.CAMPO_ID_COMPLETO;
 
         if (selection != null) {
             sql += " WHERE " + selection;
