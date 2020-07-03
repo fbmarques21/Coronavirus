@@ -29,4 +29,8 @@ public class MainActivity extends AppCompatActivity{
         Intent intentDados = new Intent(this,display_lista_paciente.class);
         startActivity(intentDados);
     }
+
+    public void pacienteAlterado(Paciente paciente) {
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.coronavirus;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -18,10 +19,17 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class BdPacienteTest {
     @Test
-    public void useAppContext() {
+    public void consegueAbrirBaseDados() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = getTargetContext();
 
-        assertEquals("com.example.coronavirus", appContext.getPackageName());
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase bdPaciente = openHelper.getReadableDatabase();
+        assertTrue(bdPaciente.isOpen());
+        bdPaciente.close();
+    }
+
+    private Context getTargetContext() {
+        return InstrumentationRegistry.getInstrumentation().getTargetContext();
     }
 }
