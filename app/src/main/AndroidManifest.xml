@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".display_lista_paciente"></activity>
+        <activity android:name=".eliminaPaciente"></activity>
+        <activity android:name=".alteraPaciente" />
+        <activity android:name=".adicionarPaciente" />
+        <activity android:name=".display_lista_paciente" />
         <activity android:name=".DisplayInserirSuspeito" />
         <activity android:name=".DisplayInserirPaciente" />
         <activity android:name=".MainActivity">

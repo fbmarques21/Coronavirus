@@ -32,4 +32,32 @@ public class BdPacienteTest {
     private Context getTargetContext() {
         return InstrumentationRegistry.getInstrumentation().getTargetContext();
     }
+
+    private long insereGenero(BdTabelGenero tabelaGenero, Genero genero) {
+        long id = tabelaGenero.insert(Converte.generoToContentValues(genero));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
+
+    private long insereGenero(BdTabelGenero tabelaGenero, String descricao) {
+        Genero genero = new Genero();
+        genero.setDescricao(descricao);
+
+        return insereGenero(tabelaGenero, genero);
+    }
+
+    @Test
+    public void consegueInserirGenero() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase bdPaciente = openHelper.getWritableDatabase();
+
+        BdTabelGenero tabelaGenero = new BdTabelGenero(bdPaciente);
+
+        insereGenero(tabelaGenero, "Masculino");
+
+        bdPaciente.close();
+    }
 }

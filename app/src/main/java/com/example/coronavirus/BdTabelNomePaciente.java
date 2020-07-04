@@ -45,9 +45,13 @@ public class BdTabelNomePaciente implements BaseColumns {
         db.execSQL("CREATE TABLE " + NOME_TABELA + "(" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CAMPO_NOME + " TEXT NOT NULL," +
-                CAMPO_ID_GENERO + " INTEGER NOT NULL," +
-                "FOREIGN KEY (" + CAMPO_ID_GENERO + ") REFERENCES " +
-                BdTabelGenero.NOME_TABELA + "("+ BdTabelGenero._ID + ")" +
+                CAMPO_ANO_NASCIMENTO + " TEXT NOT NULL," +
+                CAMPO_GENERO + " TEXT NOT NULL," +
+                CAMPO_DISTRITO + " TEXT NOT NULL," +
+                CAMPO_ESTADO + " TEXT NOT NULL," +
+                CAMPO_ID_DISTRITO + " INTEGER NOT NULL," +
+                "FOREIGN KEY (" + CAMPO_ID_DISTRITO + ") REFERENCES " +
+                    BdTableDistrito.NOME_TABELA + "("+ BdTableDistrito._ID + ")" +
                 ")");
     }
 

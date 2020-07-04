@@ -14,10 +14,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
     }
 
-    public void inserirPaciente(View view) {
-        Intent intentInserir = new Intent(this, DisplayInserirPaciente.class);
-        startActivity(intentInserir);
-    }
+
 
 
     public void inserirSuspeito(View view) {
