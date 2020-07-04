@@ -71,6 +71,8 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#DD1212"
+        android:shadowColor="#00D80404"
         android:text="ELIMINAR" />
 
     <Button

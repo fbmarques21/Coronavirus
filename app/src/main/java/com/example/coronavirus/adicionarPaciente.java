@@ -3,6 +3,7 @@ package com.example.coronavirus;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -11,11 +12,14 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class adicionarPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class adicionarPaciente extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int ID_CURSOR_LOADER_CATEGORIAS = 0;
     private EditText editTextNome;
     private EditText editTextAno;
@@ -24,9 +28,29 @@ public class adicionarPaciente extends AppCompatActivity implements LoaderManage
     private Spinner spinnerEstado;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_adicionar_paciente);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_adicionar_paciente, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Context context = getContext();
+
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setFragmentActual(this);
+        activity.setMenuActual(R.menu.menu_inserir_livro);
+
+        editTextTitulo = (EditText) view.findViewById(R.id.editTextTitulo);
+        spinnerCategoria = (Spinner) view.findViewById(R.id.spinnerCategoria);
+
+        mostraDadosSpinnerCategorias(null);
+
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_CATEGORIAS, null, this);
     }
 
     /**
