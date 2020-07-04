@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class eliminaPaciente extends AppCompatActivity {
+public class EliminaPacienteFragmnet extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elimina_paciente);
+    }
+
+    public void cancelar() {
+
     }
 }

@@ -6,7 +6,7 @@
     app:startDestination="@id/adicionarPaciente">
     <activity
         android:id="@+id/adicionarPaciente"
-        android:name="com.example.coronavirus.adicionarPaciente"
+        android:name="com.example.coronavirus.AdicionarPacienteFragment"
         android:label="adicionarPaciente" >
         <action
             android:id="@+id/action_NovoPaciente_to_ListaPaciente"
@@ -14,7 +14,7 @@
     </activity>
     <activity
         android:id="@+id/alteraPaciente2"
-        android:name="com.example.coronavirus.alteraPaciente"
+        android:name="com.example.coronavirus.AlteraPacienteFragment"
         android:label="fragment_altera_paciente"
         tools:layout="@layout/fragment_altera_paciente" >
         <action
@@ -23,7 +23,7 @@
     </activity>
     <activity
         android:id="@+id/eliminaPaciente"
-        android:name="com.example.coronavirus.eliminaPaciente"
+        android:name="com.example.coronavirus.EliminaPacienteFragmnet"
         android:label="activity_elimina_paciente"
         tools:layout="@layout/activity_elimina_paciente" >
         <action
@@ -32,7 +32,7 @@
     </activity>
     <activity
         android:id="@+id/display_lista_paciente"
-        android:name="com.example.coronavirus.display_lista_paciente"
+        android:name="com.example.coronavirus.ListaPacienteFragment"
         android:label="activity_display_lista_paciente"
         tools:layout="@layout/activity_display_lista_paciente" >
         <action

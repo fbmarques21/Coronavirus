@@ -19,7 +19,7 @@ import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class adicionarPaciente extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class AdicionarPacienteFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int ID_CURSOR_LOADER_CATEGORIAS = 0;
     private EditText editTextNome;
     private EditText editTextAno;
@@ -125,6 +125,14 @@ public class adicionarPaciente extends Fragment implements LoaderManager.LoaderC
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
+    }
+
+    public void guardar() {
+
+    }
+
+    public void cancelar() {
 
     }
 }
