@@ -49,7 +49,7 @@ public class EliminaPacienteFragmnet extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         activity.setFragmentActual(this);
 
-        activity.setMenuActual(R.menu.menu_eliminar_paciente);
+        activity.setMenuActual(R.layout.fragment_eliminar_paciente);
 
         textViewNome = (TextView) view.findViewById(R.id.textViewEnome);
         textViewAno = (TextView) view.findViewById(R.id.textViewEano);

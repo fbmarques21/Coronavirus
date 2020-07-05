@@ -34,7 +34,7 @@
         android:id="@+id/display_lista_paciente"
         android:name="com.example.coronavirus.ListaPacienteFragment"
         android:label="activity_display_lista_paciente"
-        tools:layout="@layout/activity_display_lista_paciente" >
+        tools:layout="@layout/fragment_lista_paciente" >
         <action
             android:id="@+id/action_novo_paciente"
             app:destination="@id/adicionarPaciente" />

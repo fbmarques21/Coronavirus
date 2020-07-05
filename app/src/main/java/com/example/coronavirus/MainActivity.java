@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity{
-    private Fragment fragmentActual = null;
-    private int menuActual = R.menu.menu_lista_paciente;
+    /*private Fragment fragmentActual = null;
+    private int menuActual = R.layout.activity_main;
     private Menu menu;
     private Paciente paciente = null;
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(menuActual, menu);
+        getLayoutInflater().inflate(menuActual, (ViewGroup) menu);
 
         this.menu = menu;
 
@@ -64,15 +67,13 @@ public class MainActivity extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (menuActual == R.menu.menu_lista_paciente) {
+        if (menuActual == R.layout.fragment_lista_paciente) {
             if (processaOpcoesMenuListaPaciente(id)) return true;
-        } else if (menuActual == R.menu.menu_inserir_paciente) {
+        } else if (menuActual == R.layout.fragment_adicionar_paciente) {
             if (processaOpcoesMenuInserirPaciente(id)) return true;
-        } else if (menuActual == R.menu.menu_alterar_paciente) {
+        } else if (menuActual == R.layout.fragment_altera_paciente) {
             if (processaOpcoesMenuAlterarPaciente(id)) return true;
-        } else if (menuActual == R.menu.menu_eliminar_paciente) {
+        } else if (menuActual == R.layout.fragment_eliminar_paciente) {
             if (processaOpcoesMenuEliminarPaciente(id)) return true;
         }
         return super.onOptionsItemSelected(item);
@@ -120,16 +121,33 @@ public class MainActivity extends AppCompatActivity{
     private boolean processaOpcoesMenuListaPaciente(int id) {
         ListaPacienteFragment listaPacienteFragment = (ListaPacienteFragment) fragmentActual;
 
-        if (id == R.id.action_inserir_livro) {
+        if (id == R.id.action_novo_paciente) {
             listaPacienteFragment.novoLivro();
             return true;
-        } else if (id == R.id.action_alterar_livro) {
+        } else if (id == R.id.action_alterar_paciente) {
             listaPacienteFragment.alteraLivro();
             return true;
-        } else if (id == R.id.action_eliminar_livro) {
+        } else if (id == R.id.action_eliminar_paciente) {
             listaPacienteFragment.eliminaLivro();
             return true;
         }
+
+        return false;
+    }*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
     }
 
+    public void inserirPaciente(View view) {
+        Intent intentInserirPaciente = new Intent(this, AdicionarPacienteFragment.class);
+        startActivity(intentInserirPaciente);
+    }
+
+    public void consultarDados(View view) {
+        Intent intentDados = new Intent(this, ListaPacienteFragment.class);
+        startActivity(intentDados);
+    }
 }

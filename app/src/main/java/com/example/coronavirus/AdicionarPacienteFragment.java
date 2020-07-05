@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 public class AdicionarPacienteFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
     public static final int ID_CURSOR_LOADER = 0;
     private EditText editTextNome;
     private EditText editTextAno;
@@ -42,6 +44,8 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
         return inflater.inflate(R.layout.fragment_adicionar_paciente, container, false);
     }
 
+    Intent intentInserirPaciente = getIntent();
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -49,7 +53,7 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
 
         MainActivity activity = (MainActivity) getActivity();
         activity.setFragmentActual(this);
-        activity.setMenuActual(R.menu.menu_inserir_paciente);
+        activity.setMenuActual(R.layout.activity_display_inserir_suspeito);
 
         editTextNome = (EditText) view.findViewById(R.id.editTextNome);
         editTextAno = (EditText) view.findViewById(R.id.editTextAno);

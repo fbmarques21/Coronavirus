@@ -83,7 +83,7 @@ public class AlteraPacienteFragment extends Fragment implements LoaderManager.Lo
         MainActivity activity = (MainActivity) getActivity();
         activity.setFragmentActual(this);
 
-        activity.setMenuActual(R.menu.menu_alterar_paciente);
+        activity.setMenuActual(R.layout.fragment_altera_paciente);
 
         editTextNome = (EditText) view.findViewById(R.id.editTextNome2);
         editTextAno = (EditText) view.findViewById(R.id.editTextAno2);

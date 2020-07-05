@@ -7,7 +7,7 @@
     tools:context=".DisplayInserirPaciente">
 
     <Button
-        android:id="@+id/buttonGuarda"
+        android:id="@+id/action_guardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -127,13 +127,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/action_cancelar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGuarda" />
+        app:layout_constraintTop_toBottomOf="@+id/action_guardar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
