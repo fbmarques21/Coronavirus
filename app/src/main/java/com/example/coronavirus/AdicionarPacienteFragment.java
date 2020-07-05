@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Context;
 import android.content.CursorLoader;
@@ -18,9 +20,12 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class AdicionarPacienteFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    public static final int ID_CURSOR_LOADER_CATEGORIAS = 0;
+    public static final int ID_CURSOR_LOADER = 0;
     private EditText editTextNome;
     private EditText editTextAno;
     private Spinner spinnerGenero;
@@ -43,14 +48,63 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
 
         MainActivity activity = (MainActivity) getActivity();
         activity.setFragmentActual(this);
-        activity.setMenuActual(R.menu.menu_inserir_livro);
+        activity.setMenuActual(R.menu.menu_inserir_paciente);
 
-        editTextTitulo = (EditText) view.findViewById(R.id.editTextTitulo);
-        spinnerCategoria = (Spinner) view.findViewById(R.id.spinnerCategoria);
+        editTextNome = (EditText) view.findViewById(R.id.editTextNome);
+        editTextAno = (EditText) view.findViewById(R.id.editTextAno);
+        spinnerGenero = (Spinner) view.findViewById(R.id.spinnerGenero);
+        spinnerDistrito = (Spinner) view.findViewById(R.id.spinnerDistrito);
+        spinnerEstado = (Spinner) view.findViewById(R.id.spinnerEstado);
 
         mostraDadosSpinnerCategorias(null);
 
-        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_CATEGORIAS, null, this);
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER, null, this);
+    }
+
+    public void cancelar() {
+        NavController navController = NavHostFragment.findNavController(AdicionarPacienteFragment.this);
+        navController.navigate(R.id.action_NovoPaciente_to_ListaPaciente);
+    }
+
+    public void guardar() {
+        String nome = editTextNome.getText().toString();
+
+        if (nome.length() == 0) {
+            editTextNome.setError("Preencha o nome");
+            editTextNome.requestFocus();
+            return;
+        }
+
+        String ano = editTextAno.getText().toString();
+
+        if (ano.length() == 0) {
+            editTextAno.setError("Preencha o ano");
+            editTextAno.requestFocus();
+            return;
+        }
+
+        long idGenero = spinnerGenero.getSelectedItemId();
+        long idDistrito = spinnerDistrito.getSelectedItemId();
+        long idEstado = spinnerEstado.getSelectedItemId();
+
+        Paciente paciente = new Paciente();
+        paciente.setNomePaciente(nome);
+        paciente.setAno(ano);
+        paciente.setIdGenero(idGenero);
+        paciente.setIdDistrito(idDistrito);
+        paciente.setIdEstado(idEstado);
+
+        try {
+            getActivity().getContentResolver().insert(PacienteContentProvider.ENDERECO_LIVROS, Converte.livroToContentValues(livro));
+            Toast.makeText(getContext(), "Livro adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            NavController navController = NavHostFragment.findNavController(AdicionarLivroFragment.this);
+            navController.navigate(R.id.action_NovoLivro_to_ListaLivros);
+        } catch (Exception e) {
+            Snackbar.make(editTextTitulo, "Erro: Não foi possível criar o livro", Snackbar.LENGTH_INDEFINITE).show();
+        }
+    }
+
+    private void mostraDadosSpinnerCategorias(Object o) {
     }
 
     /**
