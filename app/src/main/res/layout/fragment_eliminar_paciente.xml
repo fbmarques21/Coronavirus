@@ -14,7 +14,7 @@
         android:text="@string/inserir_Nome" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/textViewEnome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Francisco Marques" />
@@ -26,7 +26,7 @@
         android:text="@string/inserir_Datadenascimento" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/textViewEano"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="2000" />
@@ -38,7 +38,7 @@
         android:text="@string/texto_Sexo" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textViewEgenero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Masculino" />
@@ -50,7 +50,7 @@
         android:text="@string/texto_Distrito" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textViewEdistrito"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guarda" />
@@ -62,13 +62,13 @@
         android:text="@string/texto_Estado" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/textViewEestado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Recuperado" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonEliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#DD1212"
@@ -76,7 +76,7 @@
         android:text="ELIMINAR" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonCancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancelar" />
