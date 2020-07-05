@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -56,7 +57,9 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
         spinnerDistrito = (Spinner) view.findViewById(R.id.spinnerDistrito);
         spinnerEstado = (Spinner) view.findViewById(R.id.spinnerEstado);
 
-        mostraDadosSpinnerCategorias(null);
+        mostraDadosSpinnerGenero(null);
+        mostraDadosSpinnerDistrito(null);
+        mostraDadosSpinnerEstado(null);
 
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER, null, this);
     }
@@ -95,16 +98,13 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
         paciente.setIdEstado(idEstado);
 
         try {
-            getActivity().getContentResolver().insert(PacienteContentProvider.ENDERECO_LIVROS, Converte.livroToContentValues(livro));
-            Toast.makeText(getContext(), "Livro adicionado com sucesso", Toast.LENGTH_SHORT).show();
-            NavController navController = NavHostFragment.findNavController(AdicionarLivroFragment.this);
-            navController.navigate(R.id.action_NovoLivro_to_ListaLivros);
+            getActivity().getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
+            Toast.makeText(getContext(), "Paciente adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            NavController navController = NavHostFragment.findNavController(AdicionarPacienteFragment.this);
+            navController.navigate(R.id.action_NovoPaciente_to_ListaPaciente);
         } catch (Exception e) {
-            Snackbar.make(editTextTitulo, "Erro: Não foi possível criar o livro", Snackbar.LENGTH_INDEFINITE).show();
+            Snackbar.make(editTextNome, "Erro: Não foi possível criar o paciente", Snackbar.LENGTH_INDEFINITE).show();
         }
-    }
-
-    private void mostraDadosSpinnerCategorias(Object o) {
     }
 
     /**
@@ -119,7 +119,7 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+        return new androidx.loader.content.CursorLoader(getContext(), PacienteContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS, null, null, BdTableDistrito.CAMPO_DESCRICAO);
     }
 
     /**
@@ -165,7 +165,9 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+        mostraDadosSpinnerGenero(null);
+        mostraDadosSpinnerDistrito(null);
+        mostraDadosSpinnerEstado(null);
     }
 
     /**
@@ -179,14 +181,44 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
+        mostraDadosSpinnerGenero(null);
+        mostraDadosSpinnerDistrito(null);
+        mostraDadosSpinnerEstado(null);
     }
 
-    public void guardar() {
+    private void mostraDadosSpinnerGenero(Cursor data) {
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                data,
+                new String[]{BdTabelGenero.CAMPO_DESCRICAO},
+                new int[]{android.R.id.text1}
+        );
 
+        spinnerGenero.setAdapter(adapter);
     }
 
-    public void cancelar() {
+    private void mostraDadosSpinnerDistrito(Cursor data) {
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                data,
+                new String[]{BdTableDistrito.CAMPO_DESCRICAO},
+                new int[]{android.R.id.text1}
+        );
 
+        spinnerDistrito.setAdapter(adapter);
+    }
+
+    private void mostraDadosSpinnerEstado(Cursor data) {
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getContext(),
+                android.R.layout.simple_list_item_1,
+                data,
+                new String[]{BdTableEstado.CAMPO_DESCRICAO},
+                new int[]{android.R.id.text1}
+        );
+
+        spinnerEstado.setAdapter(adapter);
     }
 }
