@@ -15,30 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class PacienteContentProvider extends ContentProvider {
-    private static final String AUTHORITY = "pt.example.livros";
+    private static final String AUTHORITY = "pt.example.coronavirus";
     private static final String PACIENTES = "pacientes";
-    private static final String ANO_NASCIMENTO = "ano_nascimento";
-    private static final String GENERO = "genero";
     private static final String DISTRITO = "distrito";
-    private static final String ESTADO = "estado";
 
     private static final Uri ENDERECO_BASE = Uri.parse("content://" + AUTHORITY);
     public static final Uri ENDERECO_PACIENTES = Uri.withAppendedPath(ENDERECO_BASE, PACIENTES);
-    public static final Uri ENDERECO_ANO_NASCIMENTO = Uri.withAppendedPath(ENDERECO_BASE, ANO_NASCIMENTO);
-    public static final Uri ENDERECO_GENERO = Uri.withAppendedPath(ENDERECO_BASE, GENERO);
     public static final Uri ENDERECO_DISTRITO = Uri.withAppendedPath(ENDERECO_BASE, DISTRITO);
-    public static final Uri ENDERECO_ESTADO = Uri.withAppendedPath(ENDERECO_BASE, ESTADO);
 
     private static final int URI_PACIENTES = 100;
     private static final int URI_ID_PACIENTES = 101;
-    private static final int URI_ANO_NASCIMENTO = 200;
-    private static final int URI_ID_ANO_NASCIMENTO = 201;
-    private static final int URI_GENERO = 300;
-    private static final int URI_ID_GENERO = 301;
     private static final int URI_DISTRITO = 400;
     private static final int URI_ID_DISTRITO = 401;
-    private static final int URI_ESTADO = 500;
-    private static final int URI_ID_ESTADO = 501;
+
     private static final String CURSOR_DIR = "vnd.android.cursor.dir/";
     private static final String CURSOR_ITEM = "vnd.android.cursor.item/";
 
@@ -50,17 +39,8 @@ public class PacienteContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, PACIENTES, URI_PACIENTES);
         uriMatcher.addURI(AUTHORITY, PACIENTES + "/#", URI_ID_PACIENTES);
 
-        uriMatcher.addURI(AUTHORITY, ANO_NASCIMENTO, URI_ANO_NASCIMENTO);
-        uriMatcher.addURI(AUTHORITY, ANO_NASCIMENTO + "/#", URI_ID_ANO_NASCIMENTO);
-
-        uriMatcher.addURI(AUTHORITY, GENERO, URI_GENERO);
-        uriMatcher.addURI(AUTHORITY, GENERO + "/#", URI_ID_GENERO);
-
         uriMatcher.addURI(AUTHORITY, DISTRITO, URI_DISTRITO);
         uriMatcher.addURI(AUTHORITY, DISTRITO + "/#", URI_ID_DISTRITO);
-
-        uriMatcher.addURI(AUTHORITY, ESTADO, URI_ESTADO);
-        uriMatcher.addURI(AUTHORITY, ESTADO + "/#", URI_ID_ESTADO);
 
         return uriMatcher;
     }
@@ -171,29 +151,11 @@ public class PacienteContentProvider extends ContentProvider {
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).query(projection, BdTabelPaciente._ID + "=?", new String[] { id }, null, null, sortOrder);
 
-            case URI_ANO_NASCIMENTO:
-                return new BdTabelAnoNascimento(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
-
-            case URI_ID_ANO_NASCIMENTO:
-                return new BdTabelAnoNascimento(bd).query(projection, BdTabelAnoNascimento._ID + "=?", new String[] { id }, null, null, sortOrder);
-
-            case URI_GENERO:
-                return new BdTabelGenero(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
-
-            case URI_ID_GENERO:
-                return new BdTabelGenero(bd).query(projection, BdTabelGenero._ID + "=?", new String[] { id }, null, null, sortOrder);
-
             case URI_DISTRITO:
                 return new BdTableDistrito(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
             case URI_ID_DISTRITO:
                 return new BdTableDistrito(bd).query(projection, BdTableDistrito._ID + "=?", new String[] { id }, null, null, sortOrder);
-
-            case URI_ESTADO:
-                return new BdTableEstado(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
-
-            case URI_ID_ESTADO:
-                return new BdTableEstado(bd).query(projection, BdTableEstado._ID + "=?", new String[] { id }, null, null, sortOrder);
 
             default:
                 throw new UnsupportedOperationException("Endereço query inválido: " + uri.getPath());
@@ -228,22 +190,10 @@ public class PacienteContentProvider extends ContentProvider {
                 return CURSOR_DIR + PACIENTES;
             case URI_ID_PACIENTES:
                 return CURSOR_ITEM + PACIENTES;
-            case URI_ANO_NASCIMENTO:
-                return CURSOR_DIR + ANO_NASCIMENTO;
-            case URI_ID_ANO_NASCIMENTO:
-                return CURSOR_ITEM + ANO_NASCIMENTO;
-            case URI_GENERO:
-                return CURSOR_DIR + GENERO;
-            case URI_ID_GENERO:
-                return CURSOR_ITEM + GENERO;
             case URI_DISTRITO:
                 return CURSOR_DIR + DISTRITO;
             case URI_ID_DISTRITO:
                 return CURSOR_ITEM + DISTRITO;
-            case URI_ESTADO:
-                return CURSOR_DIR + ESTADO;
-            case URI_ID_ESTADO:
-                return CURSOR_ITEM + ESTADO;
             default:
                 return null;
         }
@@ -274,20 +224,8 @@ public class PacienteContentProvider extends ContentProvider {
                 id = (new BdTabelPaciente(bd).insert(values));
                 break;
 
-            case URI_ANO_NASCIMENTO:
-                id = (new BdTabelAnoNascimento(bd).insert(values));
-                break;
-
-            case URI_GENERO:
-                id = (new BdTabelGenero(bd).insert(values));
-                break;
-
             case URI_DISTRITO:
                 id = (new BdTableDistrito(bd).insert(values));
-                break;
-
-            case URI_ESTADO:
-                id = (new BdTableEstado(bd).insert(values));
                 break;
 
             default:
@@ -332,17 +270,8 @@ public class PacienteContentProvider extends ContentProvider {
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).delete(BdTabelPaciente._ID + "=?", new String[]{id});
 
-            case URI_ID_ANO_NASCIMENTO:
-                return new BdTabelAnoNascimento(bd).delete(BdTabelAnoNascimento._ID + "=?", new String[] { id });
-
-            case URI_ID_GENERO:
-                return new BdTabelGenero(bd).delete(BdTabelGenero._ID + "=?", new String[] { id });
-
             case URI_ID_DISTRITO:
                 return new BdTableDistrito(bd).delete(BdTableDistrito._ID + "=?", new String[] { id });
-
-            case URI_ID_ESTADO:
-                return new BdTableEstado(bd).delete(BdTableEstado._ID + "=?", new String[] { id });
 
             default:
                 throw new UnsupportedOperationException("Endereço delete inválido: " + uri.getPath());
@@ -377,17 +306,8 @@ public class PacienteContentProvider extends ContentProvider {
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).update(values, BdTabelPaciente._ID + "=?", new String[] { id });
 
-            case URI_ID_ANO_NASCIMENTO:
-                return new BdTabelAnoNascimento(bd).update(values,BdTabelAnoNascimento._ID + "=?", new String[] { id });
-
-            case URI_ID_GENERO:
-                return new BdTabelGenero(bd).update(values,BdTabelGenero._ID + "=?", new String[] { id });
-
             case URI_ID_DISTRITO:
                 return new BdTableDistrito(bd).update(values,BdTableDistrito._ID + "=?", new String[] { id });
-
-            case URI_ID_ESTADO:
-                return new BdTableEstado(bd).update(values,BdTableEstado._ID + "=?", new String[] { id });
 
             default:
                 throw new UnsupportedOperationException("Endereço de update inválido: " + uri.getPath());

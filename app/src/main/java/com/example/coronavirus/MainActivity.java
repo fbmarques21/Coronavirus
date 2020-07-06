@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity{
         Intent intentInserirPaciente = new Intent(this, DisplayInserirPaciente.class);
         startActivity(intentInserirPaciente);
     }
-    public void verDados (View view){
+    public void consultarDados (View view){
 
         Intent intentDados = new Intent(this, ListaPaciente.class);
         startActivity(intentDados);
     }
-    public void inserirSuspeitos(View view){
+    public void inserirSuspeito(View view){
 
         Intent intentInserirSuspeitos = new Intent(this, DisplayInserirSuspeito.class);
         startActivity(intentInserirSuspeitos);

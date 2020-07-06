@@ -14,22 +14,10 @@ public class DisplayInserirSuspeito extends AppCompatActivity implements Adapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_inserir_suspeito);
-
-        Spinner spinner = findViewById(R.id.spinnerGenero);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genero, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
-        Spinner spinner2 = findViewById(R.id.spinnerDistrito);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.distrito, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);
+        setContentView(R.layout.display_inserir_suspeito);
     }
 
-    Intent intentInsert = getIntent();
+    Intent intentInserirSuspeitos = getIntent();
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
