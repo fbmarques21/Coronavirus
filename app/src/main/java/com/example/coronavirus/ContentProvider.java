@@ -14,7 +14,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class PacienteContentProvider extends ContentProvider {
+public class ContentProvider extends android.content.ContentProvider {
     private static final String AUTHORITY = "pt.example.coronavirus";
     private static final String PACIENTES = "pacientes";
     private static final String DISTRITO = "distrito";

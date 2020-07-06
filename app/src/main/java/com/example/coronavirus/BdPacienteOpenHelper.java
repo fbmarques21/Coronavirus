@@ -2,10 +2,11 @@ package com.example.coronavirus;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
+public class BdPacienteOpenHelper extends SQLiteOpenHelper {
     public static final String NOME_BASE_DADOS = "paciente.db";
     private static final int VERSAO_BASE_DADOS = 1;
     private static final boolean DESENVOLVIMENTO = true;
@@ -24,8 +25,8 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        BdTabelPaciente tabelaNomePaciente = new BdTabelPaciente(db);
-        tabelaNomePaciente.cria();
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
+        tabelaPaciente.cria();
 
         BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
         tabelaDistrito.cria();
@@ -41,20 +42,22 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
     }
 
     private void seedData(SQLiteDatabase db) {
-        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
         BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
 
         Distrito distrito = new Distrito();
         distrito.setNome_distrito("Guarda");
         distrito.setNr_infetados(1);
         distrito.setNr_mortos(1);
         distrito.setNr_recuperados(0);
-        long idDisGua = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+        distrito.setNr_habitantes(42531);
+        long idGuarda = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         Paciente paciente = new Paciente();
         paciente.setNomePaciente("Francisco Marques");
+        paciente.setAno("2000");
         paciente.setGenero("Masculino");
-        paciente.setIdDistrito(idDisGua);
+        paciente.setIdDistrito(idGuarda);
         paciente.setEstado("Recuperado");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
 
@@ -63,12 +66,14 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         distrito.setNr_infetados(1);
         distrito.setNr_mortos(1);
         distrito.setNr_recuperados(0);
-        long idLis = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+        distrito.setNr_habitantes(2265832);
+        long idLisboa = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         paciente = new Paciente();
         paciente.setNomePaciente("Miguel");
+        paciente.setAno("1999");
         paciente.setGenero("Masculino");
-        paciente.setIdDistrito(idLis);
+        paciente.setIdDistrito(idLisboa);
         paciente.setEstado("Morto");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
     }
@@ -77,9 +82,11 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         Distrito distrito = new Distrito();
 
         distrito.setNome_distrito(context.getString(R.string.distrito_guarda));
+        distrito.setNr_habitantes(42531);
         tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         distrito.setNome_distrito(context.getString(R.string.distrito_lisboa));
+        distrito.setNr_habitantes(2265832);
         tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
     }
 

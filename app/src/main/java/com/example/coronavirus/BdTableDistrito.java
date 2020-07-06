@@ -7,32 +7,34 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public class BdTableDistrito implements BaseColumns {
-    public static final String NOME_TABELA = "distrito";
-    public static final String NOME_DISTRITO = "nome_distrito";
-    public static final String CAMPO_NR_INFETADOS_DISTRITO = "nr_infetados";
-    public static final String CAMPO_NR_RECUPERADOS_DISTRITO = "nr_recuperados";
-    public static final String CAMPO_NR_MORTOS_DISTRITO = "nr_mortos";
+    public static String NOME_TABELA = "distrito";
+    public static String NOME_DISTRITO = "nome_distrito";
+    public static String NR_INFETADOS_DISTRITO = "nr_infetados";
+    public static String NR_RECUPERADOS_DISTRITO = "nr_recuperados";
+    public static String NR_MORTOS_DISTRITO = "nr_mortos";
+    public static String NR_HABITANTES_CONCELHO = "nr_habitantes";
 
     public static String CAMPO_ID_COMPLETO = NOME_TABELA + "." + _ID;
-    public static String DISTRITO_COMPLETO = NOME_TABELA + "." + NOME_DISTRITO;
-    public static String NR_INFETADOS_COMPLETO = NOME_TABELA + "." + CAMPO_NR_INFETADOS_DISTRITO;
-    public static String NR_RECUPERADOS_COMPLETO = NOME_TABELA + "." + CAMPO_NR_RECUPERADOS_DISTRITO;
-    public static String NR_MORTOS_COMPLETO = NOME_TABELA + "." + CAMPO_NR_MORTOS_DISTRITO;
+    public static String NOME_DISTRITO_COMPLETO = NOME_TABELA + "." + NOME_DISTRITO;
+    public static String NR_INFETADOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_INFETADOS_DISTRITO;
+    public static String NR_RECUPERADOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_RECUPERADOS_DISTRITO;
+    public static String NR_MORTOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_MORTOS_DISTRITO;
+    public static String NR_HABITANTES_COMPLETO = NOME_TABELA + "." + NR_HABITANTES_CONCELHO;
 
-    public static final String[] TODOS_CAMPOS_DISTRITO = {CAMPO_ID_COMPLETO, DISTRITO_COMPLETO, NR_INFETADOS_COMPLETO, NR_RECUPERADOS_COMPLETO,
-                                    NR_RECUPERADOS_COMPLETO, NR_MORTOS_COMPLETO};
+    public static final String[] TODOS_CAMPOS_DISTRITO = {_ID, NOME_DISTRITO, NR_INFETADOS_DISTRITO, NR_RECUPERADOS_DISTRITO, NR_MORTOS_DISTRITO};
     private SQLiteDatabase db;
+
     public BdTableDistrito(SQLiteDatabase db) {
         this.db = db;
     }
-
     public void cria() {
         db.execSQL("CREATE TABLE " + NOME_TABELA + " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NOME_DISTRITO + " TEXT NOT NULL, " +
-                CAMPO_NR_INFETADOS_DISTRITO + " INTEGER DEFAULT 0," +
-                CAMPO_NR_RECUPERADOS_DISTRITO +  " INTEGER DEFAULT 0," +
-                CAMPO_NR_MORTOS_DISTRITO + " INTEGER DEFAULT 0" +
+                NR_INFETADOS_DISTRITO + " INTEGER DEFAULT 0," +
+                NR_RECUPERADOS_DISTRITO +  " INTEGER DEFAULT 0," +
+                NR_MORTOS_DISTRITO + " INTEGER DEFAULT 0," +
+                NR_HABITANTES_COMPLETO + " INTEGER NOT NULL" +
                 ")"
         );
     }

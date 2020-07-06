@@ -105,7 +105,7 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         paciente.setEstado(Estado);
 
         try {
-            this.getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
+            this.getContentResolver().insert(ContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
             Toast.makeText(this, "SUCESSO", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new androidx.loader.content.CursorLoader(this, PacienteContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS_DISTRITO, null, null, null);
+        return new androidx.loader.content.CursorLoader(this, ContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS_DISTRITO, null, null, null);
     }
 
     /**
