@@ -14,19 +14,23 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class ContentProvider extends android.content.ContentProvider {
+public class PacienteContentProvider extends android.content.ContentProvider {
     private static final String AUTHORITY = "pt.example.coronavirus";
     private static final String PACIENTES = "pacientes";
     private static final String DISTRITO = "distrito";
+    private static final String SUSPEITOS = "suspeito";
 
     private static final Uri ENDERECO_BASE = Uri.parse("content://" + AUTHORITY);
     public static final Uri ENDERECO_PACIENTES = Uri.withAppendedPath(ENDERECO_BASE, PACIENTES);
     public static final Uri ENDERECO_DISTRITO = Uri.withAppendedPath(ENDERECO_BASE, DISTRITO);
+    public static final Uri ENDERECO_SUSPEITOS = Uri.withAppendedPath(ENDERECO_BASE, SUSPEITOS);
 
-    private static final int URI_PACIENTES = 100;
-    private static final int URI_ID_PACIENTES = 101;
-    private static final int URI_DISTRITO = 400;
-    private static final int URI_ID_DISTRITO = 401;
+    private static final int URI_DISTRITO = 100;
+    private static final int URI_ID_DISTRITO = 101;
+    private static final int URI_PACIENTES = 200;
+    private static final int URI_ID_PACIENTES = 201;
+    private static final int URI_SUSPEITOS = 300;
+    private static final int URI_ID_SUSPEITOS = 301;
 
     private static final String CURSOR_DIR = "vnd.android.cursor.dir/";
     private static final String CURSOR_ITEM = "vnd.android.cursor.item/";
@@ -36,11 +40,14 @@ public class ContentProvider extends android.content.ContentProvider {
     private UriMatcher getUriMatcher(){
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
+        uriMatcher.addURI(AUTHORITY, DISTRITO, URI_DISTRITO);
+        uriMatcher.addURI(AUTHORITY, DISTRITO + "/#", URI_ID_DISTRITO);
+
         uriMatcher.addURI(AUTHORITY, PACIENTES, URI_PACIENTES);
         uriMatcher.addURI(AUTHORITY, PACIENTES + "/#", URI_ID_PACIENTES);
 
-        uriMatcher.addURI(AUTHORITY, DISTRITO, URI_DISTRITO);
-        uriMatcher.addURI(AUTHORITY, DISTRITO + "/#", URI_ID_DISTRITO);
+        uriMatcher.addURI(AUTHORITY, SUSPEITOS, URI_SUSPEITOS);
+        uriMatcher.addURI(AUTHORITY, SUSPEITOS + "/#", URI_ID_SUSPEITOS);
 
         return uriMatcher;
     }
@@ -73,7 +80,6 @@ public class ContentProvider extends android.content.ContentProvider {
     @Override
     public boolean onCreate() {
         openHelper = new BdPacienteOpenHelper(getContext());
-
         return true;
     }
 
@@ -145,17 +151,24 @@ public class ContentProvider extends android.content.ContentProvider {
         String id = uri.getLastPathSegment();
 
         switch (getUriMatcher().match(uri)) {
+            case URI_DISTRITO:
+                return new BdTableDistrito(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+
+            case URI_ID_DISTRITO:
+                return new BdTableDistrito(bd).query(projection, BdTableDistrito._ID + "=?", new String[] { id }, null, null, sortOrder);
+
             case URI_PACIENTES:
                 return new BdTabelPaciente(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).query(projection, BdTabelPaciente._ID + "=?", new String[] { id }, null, null, sortOrder);
 
-            case URI_DISTRITO:
-                return new BdTableDistrito(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+            case URI_SUSPEITOS:
+                return new BdTableSuspeitos(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
-            case URI_ID_DISTRITO:
-                return new BdTableDistrito(bd).query(projection, BdTableDistrito._ID + "=?", new String[] { id }, null, null, sortOrder);
+            case URI_ID_SUSPEITOS:
+                return new BdTableSuspeitos(bd).query(projection, BdTableSuspeitos._ID + "=?", new String[] { id }, null, null, sortOrder);
+
 
             default:
                 throw new UnsupportedOperationException("Endereço query inválido: " + uri.getPath());
@@ -186,14 +199,18 @@ public class ContentProvider extends android.content.ContentProvider {
         int codigoUri = getUriMatcher().match(uri);
 
         switch (codigoUri) {
-            case URI_PACIENTES:
-                return CURSOR_DIR + PACIENTES;
-            case URI_ID_PACIENTES:
-                return CURSOR_ITEM + PACIENTES;
             case URI_DISTRITO:
                 return CURSOR_DIR + DISTRITO;
             case URI_ID_DISTRITO:
                 return CURSOR_ITEM + DISTRITO;
+            case URI_PACIENTES:
+                return CURSOR_DIR + PACIENTES;
+            case URI_ID_PACIENTES:
+                return CURSOR_ITEM + PACIENTES;
+            case URI_SUSPEITOS:
+                return CURSOR_DIR + SUSPEITOS;
+            case URI_ID_SUSPEITOS:
+                return CURSOR_ITEM + SUSPEITOS;
             default:
                 return null;
         }
@@ -220,12 +237,16 @@ public class ContentProvider extends android.content.ContentProvider {
         long id;
 
         switch (getUriMatcher().match(uri)) {
+            case URI_DISTRITO:
+                id = (new BdTableDistrito(bd).insert(values));
+                break;
+
             case URI_PACIENTES:
                 id = (new BdTabelPaciente(bd).insert(values));
                 break;
 
-            case URI_DISTRITO:
-                id = (new BdTableDistrito(bd).insert(values));
+            case URI_SUSPEITOS:
+                id = (new BdTableSuspeitos(bd).insert(values));
                 break;
 
             default:
@@ -267,11 +288,14 @@ public class ContentProvider extends android.content.ContentProvider {
         String id = uri.getLastPathSegment();
 
         switch (getUriMatcher().match(uri)) {
+            case URI_ID_DISTRITO:
+                return new BdTableDistrito(bd).delete(BdTableDistrito._ID + "=?", new String[] { id });
+
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).delete(BdTabelPaciente._ID + "=?", new String[]{id});
 
-            case URI_ID_DISTRITO:
-                return new BdTableDistrito(bd).delete(BdTableDistrito._ID + "=?", new String[] { id });
+            case URI_ID_SUSPEITOS:
+                return new BdTableSuspeitos(bd).delete(BdTableSuspeitos._ID + "=?", new String[]{id});
 
             default:
                 throw new UnsupportedOperationException("Endereço delete inválido: " + uri.getPath());
@@ -303,11 +327,14 @@ public class ContentProvider extends android.content.ContentProvider {
         String id = uri.getLastPathSegment();
 
         switch (getUriMatcher().match(uri)) {
+            case URI_ID_DISTRITO:
+                return new BdTableDistrito(bd).update(values,BdTableDistrito._ID + "=?", new String[] { id });
+
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).update(values, BdTabelPaciente._ID + "=?", new String[] { id });
 
-            case URI_ID_DISTRITO:
-                return new BdTableDistrito(bd).update(values,BdTableDistrito._ID + "=?", new String[] { id });
+            case URI_ID_SUSPEITOS:
+                return new BdTableSuspeitos(bd).update(values, BdTableSuspeitos._ID + "=?", new String[] { id });
 
             default:
                 throw new UnsupportedOperationException("Endereço de update inválido: " + uri.getPath());

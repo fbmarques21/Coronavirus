@@ -46,11 +46,15 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
         if(cursor == null) {
             return 0;
         }
-
         return cursor.getCount();
     }
 
     private ViewHolderPaciente viewHolderPacienteSelecionado = null;
+
+    public Paciente getPacienteSelecionado() {
+        if (viewHolderPacienteSelecionado == null) return null;
+        return viewHolderPacienteSelecionado.paciente;
+    }
 
     public class ViewHolderPaciente extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Paciente paciente = null;
@@ -69,17 +73,15 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
             textViewGenero = (TextView)itemView.findViewById(R.id.textViewGeneroPaciente);
             textViewDistrito = (TextView)itemView.findViewById(R.id.textViewDistritoPaciente);
             textViewEstado = (TextView)itemView.findViewById(R.id.textViewEstadoPaciente);
-
             itemView.setOnClickListener(this);
         }
 
         public void setPaciente(Paciente paciente) {
             this.paciente = paciente;
-
             textViewNome.setText(paciente.getNomePaciente());
             textViewAno.setText(String.valueOf(paciente.getAno()));
             textViewGenero.setText(paciente.getGenero());
-            textViewDistrito.setText(String.valueOf(paciente.getDistrito()));
+            textViewDistrito.setText(String.valueOf(paciente.getIdDistrito()));
             textViewEstado.setText(paciente.getEstado());
         }
 
@@ -95,8 +97,7 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
 
             viewHolderPacienteSelecionado = this;
             seleciona();
-
-            DisplayInserirPaciente displayInserirPaciente = (DisplayInserirPaciente) AdaptadorPaciente.this.context;
+            MostrarPaciente mostrarPaciente = (MostrarPaciente) AdaptadorPaciente.this.context;
         }
 
         private void seleciona() {
