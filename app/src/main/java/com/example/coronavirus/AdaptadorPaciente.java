@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,11 +64,11 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
         public ViewHolderPaciente(@NonNull View itemView) {
             super(itemView);
 
-            textViewNome = (TextView)itemView.findViewById(R.id.textViewNome);
-            textViewAno = (TextView)itemView.findViewById(R.id.textViewAnoNascimento);
-            textViewGenero = (TextView)itemView.findViewById(R.id.textViewGenero);
-            textViewDistrito = (TextView)itemView.findViewById(R.id.textViewDistrito);
-            textViewEstado = (TextView)itemView.findViewById(R.id.textViewEstado);
+            textViewNome = (TextView)itemView.findViewById(R.id.textViewNomePaciente);
+            textViewAno = (TextView)itemView.findViewById(R.id.textViewAnoNascimentoPaciente);
+            textViewGenero = (TextView)itemView.findViewById(R.id.textViewGeneroPaciente);
+            textViewDistrito = (TextView)itemView.findViewById(R.id.textViewDistritoPaciente);
+            textViewEstado = (TextView)itemView.findViewById(R.id.textViewEstadoPaciente);
 
             itemView.setOnClickListener(this);
         }

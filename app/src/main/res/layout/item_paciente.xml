@@ -7,7 +7,7 @@
     tools:context=".DisplayConsultarDados">
 
     <TextView
-        android:id="@+id/textViewNome"
+        android:id="@+id/textViewNomePaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,7 +19,7 @@
         tools:text="Francisco Marques" />
 
     <TextView
-        android:id="@+id/textViewAnoNascimento"
+        android:id="@+id/textViewAnoNascimentoPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,11 +27,11 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomePaciente"
         tools:text="2000" />
 
     <TextView
-        android:id="@+id/textViewGenero"
+        android:id="@+id/textViewGeneroPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -39,11 +39,11 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAnoNascimento"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAnoNascimentoPaciente"
         tools:text="Masculino" />
 
     <TextView
-        android:id="@+id/textViewDistrito"
+        android:id="@+id/textViewDistritoPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,11 +51,11 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGenero"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGeneroPaciente"
         tools:text="Guarda" />
 
     <TextView
-        android:id="@+id/textViewEstado"
+        android:id="@+id/textViewEstadoPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -63,7 +63,7 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDistrito"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistritoPaciente"
         tools:text="Recuperado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
