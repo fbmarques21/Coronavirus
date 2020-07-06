@@ -13,7 +13,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -26,16 +28,11 @@ import java.util.List;
 public class DisplayInserirPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerDistrito;
     public static final int ID_CURSOR_LOADER_DISTRITO = 0;
-    private Spinner dropdowngenero;
-    private Spinner dropdownEstado;
-    private EditText EditTextNome;
-    private EditText EditTextAno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_inserir_paciente);
-
         Intent intentInserirPaciente = getIntent();
 
         Spinner dropdowngenero;
@@ -46,29 +43,45 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
         dropdowngenero.setAdapter(adapter);
 
+        dropdowngenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         spinnerDistrito = (Spinner) findViewById(R.id.spinnerDistrito);
         mostrarDadosSpinnerDistrito(null);
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_DISTRITO, null, this);
 
         Spinner dropdownEstado;
         dropdownEstado = (Spinner) findViewById(R.id.spinnerEstado);
-
         final List<String> Estado = new ArrayList<>();
         Estado.add(getString(R.string.EstadoInfetado));
         Estado.add(getString(R.string.EstadoRecuperado));
         Estado.add(getString(R.string.EstadoMorto));
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Estado);
         dropdownEstado.setAdapter(adapter3);
+        dropdownEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void mostrarDadosSpinnerDistrito(Cursor data) {
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                data,
-                new String[]{BdTableDistrito.NOME_DISTRITO},
-                new int[]{android.R.id.text1}
-        );
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,android.R.layout.simple_spinner_item,data,new String[]{BdTableDistrito.NOME_DISTRITO},new int[]{android.R.id.text1});
         spinnerDistrito.setAdapter(adapter);
     }
 
@@ -77,41 +90,42 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         EditText TextEditNome = (EditText) findViewById(R.id.editTextNome);
         EditText TextEditAno = (EditText) findViewById(R.id.editTextAno);
 
-        String Estado = ((Spinner) findViewById(R.id.spinnerEstado)).getSelectedItem().toString();
-        String Genero = ((Spinner) findViewById(R.id.spinnerGenero)).getSelectedItem().toString();
-        long distritoEscolhido = spinnerDistrito.getSelectedItemId();
-
         String nome = TextEditNome.getText().toString();
+        String ano = TextEditAno.getText().toString();
 
-        if (nome.length() < 1) {
+        String estado = ((Spinner) findViewById(R.id.spinnerEstado)).getSelectedItem().toString();
+        String genero = ((Spinner) findViewById(R.id.spinnerGenero)).getSelectedItem().toString();
+
+
+        if (nome.length() == 0) {
             TextEditNome.setError(getString(R.string.campo_obrigatorio));
             TextEditNome.requestFocus();
             return;
         }
-
-        String ano = TextEditAno.getText().toString();
-
-        if (nome.length() < 1) {
+        else if ((ano.length() != 9)) {
             TextEditAno.setError(getString(R.string.campo_obrigatorio));
             TextEditAno.requestFocus();
-            return;
-        }
+        }else {
+            long idDistrito = spinnerDistrito.getSelectedItemId();
 
-        Paciente paciente = new Paciente();
-        paciente.setNomePaciente(nome);
-        paciente.setIdDistrito(distritoEscolhido);
-        paciente.setAno(ano);
-        paciente.setGenero(Genero);
-        paciente.setEstado(Estado);
-
-        try {
-            this.getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
-            Toast.makeText(this, "SUCESSO", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
+            Paciente paciente = new Paciente();
+            paciente.setNomePaciente(nome);
+            paciente.setAno("data");
+            paciente.setGenero(genero);
+            paciente.setIdDistrito(idDistrito);
+            paciente.setEstado(estado);
+            try {
+                this.getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
+                Toast.makeText(this, "Paciente inserido com sucesso", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "Paciente Não inserido ", Toast.LENGTH_SHORT).show();
+            }
         }
-        Intent intentPacientes = new Intent(this, DisplayVerEstatistica.class);
-        startActivity(intentPacientes);
+    }
+    @Override
+    protected void onResume() {
+        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_DISTRITO, null, this);
+        super.onResume();
     }
 
     /**
@@ -126,7 +140,7 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new androidx.loader.content.CursorLoader(this, PacienteContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS_DISTRITO, null, null, null);
+        return new androidx.loader.content.CursorLoader(this,PacienteContentProvider.ENDERECO_DISTRITO,BdTableDistrito.TODOS_CAMPOS_DISTRITO,null,null,null);
     }
 
     /**
