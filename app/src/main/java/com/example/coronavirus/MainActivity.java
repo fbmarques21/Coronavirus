@@ -13,18 +13,18 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
     }
 
-    public void inserirPaciente(View view){
-        Intent intentInserirPaciente = new Intent(this, DisplayInserirPaciente.class);
-        startActivity(intentInserirPaciente);
+    public void mostrarPaciente(View view){
+        Intent intentMostrarPaciente = new Intent(this, MostrarPaciente.class);
+        startActivity(intentMostrarPaciente);
     }
-    public void consultarDados (View view){
+    public void verEstatisticas (View view){
 
-        Intent intentDados = new Intent(this, ListaPaciente.class);
-        startActivity(intentDados);
+        Intent intentEstatistica = new Intent(this, DisplayVerEstatistica.class);
+        startActivity(intentEstatistica);
     }
-    public void inserirSuspeito(View view){
+    public void mostrarSuspeito(View view){
 
-        Intent intentInserirSuspeitos = new Intent(this, DisplayInserirSuspeito.class);
-        startActivity(intentInserirSuspeitos);
+        Intent intentMostrarSuspeitos = new Intent(this, MostrarPaciente.class);
+        startActivity(intentMostrarSuspeitos);
     }
 }

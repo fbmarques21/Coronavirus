@@ -3,9 +3,10 @@ package com.example.coronavirus;
 public class Distrito {
     private long id = -1;
     private String nome_distrito;
-    private Integer nr_infetados;
-    private Integer nr_recuperados;
-    private Integer nr_mortos;
+    private Integer nr_infetados = 0;
+    private Integer nr_recuperados = 0;
+    private Integer nr_mortos = 0;
+    private Integer nr_habitantes = 0;
 
     public long getId() {
         return id;
@@ -45,5 +46,13 @@ public class Distrito {
 
     public void setNr_mortos(Integer nr_mortos) {
         this.nr_mortos = nr_mortos;
+    }
+
+    public Integer getNr_habitantes() {
+        return nr_habitantes;
+    }
+
+    public void setNr_habitantes(Integer nr_habitantes) {
+        this.nr_habitantes = nr_habitantes;
     }
 }

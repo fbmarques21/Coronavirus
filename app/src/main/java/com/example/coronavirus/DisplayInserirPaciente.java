@@ -13,19 +13,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DisplayInserirPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -115,7 +110,7 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         } catch (Exception e) {
             Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
         }
-        Intent intentPacientes = new Intent(this, ListaPaciente.class);
+        Intent intentPacientes = new Intent(this, DisplayVerEstatistica.class);
         startActivity(intentPacientes);
     }
 

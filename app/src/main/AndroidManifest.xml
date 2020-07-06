@@ -13,7 +13,7 @@
         tools:ignore="ExtraText">
         <activity android:name=".MostrarSuspeito" />
         <activity android:name=".MostrarPaciente" />
-        <activity android:name=".ListaPaciente" />
+        <activity android:name=".DisplayVerEstatistica" />
         <activity android:name=".DisplayInserirPaciente" />
         <activity android:name=".DisplayInserirSuspeito" />
         <activity android:name=".MainActivity">

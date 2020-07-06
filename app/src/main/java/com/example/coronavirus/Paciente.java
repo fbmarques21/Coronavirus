@@ -5,8 +5,7 @@ public class Paciente {
     private String nomePaciente;
     private String Ano;
     private String genero;
-    private long idDistrito = -1;
-    private String Distrito;
+    private long idDistrito;
     private String estado;
 
     public long getId() {
@@ -47,14 +46,6 @@ public class Paciente {
 
     public void setIdDistrito(long idDistrito) {
         this.idDistrito = idDistrito;
-    }
-
-    public String getDistrito() {
-        return Distrito;
-    }
-
-    public void setDistrito(String distrito) {
-        Distrito = distrito;
     }
 
     public String getEstado() {
