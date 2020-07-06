@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -43,8 +46,6 @@ public class AdicionarPacienteFragment extends Fragment implements LoaderManager
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adicionar_paciente, container, false);
     }
-
-    Intent intentInserirPaciente = getIntent();
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
