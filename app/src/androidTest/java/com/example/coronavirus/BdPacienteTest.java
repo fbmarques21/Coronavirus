@@ -86,7 +86,7 @@ public class BdPacienteTest {
     }
 
     @Test
-    public void consegueLerConcelhos(){
+    public void consegueLerDistrito(){
         Context appContext = getTargetContext();
         BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
         SQLiteDatabase bd = openHelper.getWritableDatabase();

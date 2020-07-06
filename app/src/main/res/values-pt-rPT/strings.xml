@@ -45,4 +45,9 @@
     <string name="texto_Estado">Estado:</string>
     <string name="guardar_Paciente">Guardar</string>
     <string name="campo_obrigatorio">Campo Obrigatório</string>
+    <string name="GeneroF">Feminino</string>
+    <string name="GeneroM">Masculino</string>
+    <string name="EstadoInfetado">Infetado</string>
+    <string name="EstadoMorto">Morto</string>
+    <string name="EstadoRecuperado">Recuperado</string>
 </resources>

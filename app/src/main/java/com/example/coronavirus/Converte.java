@@ -6,7 +6,7 @@ import android.database.Cursor;
 public class Converte {
     public static ContentValues pacienteToContentValues(Paciente paciente) {
         ContentValues valores = new ContentValues();
-        valores.put(BdTabelPaciente.CAMPO_NOME, paciente.getNomePaciente());
+        valores.put(BdTabelPaciente.NOME_PACIENTE, paciente.getNomePaciente());
         valores.put(BdTabelPaciente.CAMPO_ANO_NASCIMENTO, paciente.getAno());
         valores.put(BdTabelPaciente.CAMPO_GENERO, paciente.getGenero());
         valores.put(BdTabelPaciente.CAMPO_ID_DISTRITO, paciente.getIdDistrito());
@@ -17,7 +17,7 @@ public class Converte {
     public static Paciente contentValuesToPaciente(ContentValues valores) {
         Paciente paciente = new Paciente();
         paciente.setId(valores.getAsLong(BdTabelPaciente._ID));
-        paciente.setNomePaciente(valores.getAsString(BdTabelPaciente.CAMPO_NOME));
+        paciente.setNomePaciente(valores.getAsString(BdTabelPaciente.NOME_PACIENTE));
         paciente.setAno(valores.getAsString(BdTabelPaciente.CAMPO_ANO_NASCIMENTO));
         paciente.setGenero(valores.getAsString(BdTabelPaciente.CAMPO_GENERO));
         paciente.setIdDistrito(valores.getAsLong(BdTabelPaciente.CAMPO_ID_DISTRITO));
@@ -29,7 +29,7 @@ public class Converte {
     public static Paciente cursorToPaciente(Cursor cursor) {
         Paciente paciente = new Paciente();
         paciente.setId(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente._ID)));
-        paciente.setNomePaciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_NOME)));
+        paciente.setNomePaciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.NOME_PACIENTE)));
         paciente.setAno(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ANO_NASCIMENTO)));
         paciente.setGenero(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_GENERO)));
         paciente.setIdDistrito(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_DISTRITO)));

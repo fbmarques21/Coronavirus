@@ -15,4 +15,9 @@
     <string name="distrito_lisboa" translatable="false">Lisboa</string>
     <string name="distrito_guarda" translatable="false">Guarda</string>
     <string name="campo_obrigatorio">Field Required</string>
+    <string name="GeneroF">Woman</string>
+    <string name="GeneroM">Man</string>
+    <string name="EstadoInfetado">Infected</string>
+    <string name="EstadoMorto">Death</string>
+    <string name="EstadoRecuperado">Recovered</string>
 </resources>

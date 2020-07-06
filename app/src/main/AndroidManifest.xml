@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
-        <activity android:name=".ListaPaciente"/>
-        <activity android:name=".DisplayInserirPaciente"/>
-        <activity android:name=".DisplayInserirSuspeito"/>
+        <activity android:name=".MostrarSuspeito"></activity>
+        <activity android:name=".MostrarPaciente" />
+        <activity android:name=".ListaPaciente" />
+        <activity android:name=".DisplayInserirPaciente" />
+        <activity android:name=".DisplayInserirSuspeito" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="pt.example.coronavirus"
             android:name=".PacienteContentProvider"
-            android:exported="false"
-        />
+            android:authorities="pt.example.coronavirus"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
@@ -23,9 +24,17 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class DisplayInserirPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerDistrito;
     public static final int ID_CURSOR_LOADER_DISTRITO = 0;
+    private Spinner dropdowngenero;
+    private Spinner dropdownEstado;
+    private EditText EditTextNome;
+    private EditText EditTextAno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +43,27 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
 
         Intent intentInserirPaciente = getIntent();
 
+        Spinner dropdowngenero;
+        dropdowngenero = (Spinner) findViewById(R.id.spinnerGenero);
+        final List<String> genero = new ArrayList<>();
+        genero.add(getString(R.string.GeneroF));
+        genero.add(getString(R.string.GeneroM));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
+        dropdowngenero.setAdapter(adapter);
+
         spinnerDistrito = (Spinner) findViewById(R.id.spinnerDistrito);
         mostrarDadosSpinnerDistrito(null);
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_DISTRITO, null, this);
+
+        Spinner dropdownEstado;
+        dropdownEstado = (Spinner) findViewById(R.id.spinnerEstado);
+
+        final List<String> Estado = new ArrayList<>();
+        Estado.add(getString(R.string.EstadoInfetado));
+        Estado.add(getString(R.string.EstadoRecuperado));
+        Estado.add(getString(R.string.EstadoMorto));
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Estado);
+        dropdownEstado.setAdapter(adapter3);
     }
 
     private void mostrarDadosSpinnerDistrito(Cursor data) {
@@ -52,42 +79,44 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
 
 
     public void NovoPaciente(View view) {
-        EditText EditTextNome = (EditText) findViewById(R.id.editTextAno);
-        String Nome = EditTextNome.getText().toString();
+        EditText TextEditNome = (EditText) findViewById(R.id.editTextNome);
+        EditText TextEditAno = (EditText) findViewById(R.id.editTextAno);
 
-        if (Nome.length() < 1) {
-            EditTextNome.setError(getString(R.string.campo_obrigatorio));
-            EditTextNome.requestFocus();
+        String Estado = ((Spinner) findViewById(R.id.spinnerEstado)).getSelectedItem().toString();
+        String Genero = ((Spinner) findViewById(R.id.spinnerGenero)).getSelectedItem().toString();
+        long distritoEscolhido = spinnerDistrito.getSelectedItemId();
+
+        String nome = TextEditNome.getText().toString();
+
+        if (nome.length() < 1) {
+            TextEditNome.setError(getString(R.string.campo_obrigatorio));
+            TextEditNome.requestFocus();
             return;
         }
 
-        EditText EditTextAnoNascimento = (EditText) findViewById(R.id.editTextAno);
-        String Ano = EditTextAnoNascimento.getText().toString();
+        String ano = TextEditAno.getText().toString();
 
-        if (Ano.length() < 10) {
-            EditTextAnoNascimento.setError(getString(R.string.campo_obrigatorio));
-            EditTextAnoNascimento.requestFocus();
+        if (nome.length() < 1) {
+            TextEditAno.setError(getString(R.string.campo_obrigatorio));
+            TextEditAno.requestFocus();
             return;
         }
-
-        long idDistrito = spinnerDistrito.getSelectedItemId();
 
         Paciente paciente = new Paciente();
-        paciente.setNomePaciente(Nome);
-        paciente.setAno("2000");
-        paciente.setGenero("Masculino");
-        paciente.setDistrito("Guarda");
-        paciente.setEstado("Recuperado");
+        paciente.setNomePaciente(nome);
+        paciente.setIdDistrito(distritoEscolhido);
+        paciente.setAno(ano);
+        paciente.setGenero(Genero);
+        paciente.setEstado(Estado);
 
-        try{
-            this.getContentResolver().insert(PacienteContentProvider.ENDERECO_DISTRITO, Converte.pacienteToContentValues(paciente));
-            Toast.makeText(this, "Paciente Inserida", Toast.LENGTH_SHORT).show();
-        }catch (Exception e){
-            Toast.makeText(this, "Erro de Inserção", Toast.LENGTH_SHORT).show();
+        try {
+            this.getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
+            Toast.makeText(this, "SUCESSO", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "FALHOU", Toast.LENGTH_SHORT).show();
         }
-
-        Intent intentPaciente = new Intent(this, ListaPaciente.class);
-        startActivity(intentPaciente);
+        Intent intentPacientes = new Intent(this, ListaPaciente.class);
+        startActivity(intentPacientes);
     }
 
     /**
@@ -102,7 +131,7 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return new androidx.loader.content.CursorLoader(this, PacienteContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS_DISTRITO,null,null,null);
+        return new androidx.loader.content.CursorLoader(this, PacienteContentProvider.ENDERECO_DISTRITO, BdTableDistrito.TODOS_CAMPOS_DISTRITO, null, null, null);
     }
 
     /**
@@ -164,5 +193,4 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mostrarDadosSpinnerDistrito(null);
     }
-
 }

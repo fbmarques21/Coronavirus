@@ -13,7 +13,6 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
 
     public BdPacienteOpenHelper(@Nullable Context context){
         super(context,NOME_BASE_DADOS, null, VERSAO_BASE_DADOS);
-
         this.context = context;
     }
 
@@ -33,6 +32,8 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
 
         BdTableSuspeitos tabelaSuspeitos = new BdTableSuspeitos(db);
         tabelaDistrito.cria();
+
+        inserirDistrito(tabelaDistrito);
 
         if (DESENVOLVIMENTO) {
             seedData(db);
@@ -72,7 +73,7 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
     }
 
-    private void inserirConcelho(BdTableDistrito tabelaDistrito) {
+    private void inserirDistrito(BdTableDistrito tabelaDistrito) {
         Distrito distrito = new Distrito();
 
         distrito.setNome_distrito(context.getString(R.string.distrito_guarda));
