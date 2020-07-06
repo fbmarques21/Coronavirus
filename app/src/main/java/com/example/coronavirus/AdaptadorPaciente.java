@@ -146,7 +146,7 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
             viewHolderPacienteSelecionado = this;
             seleciona();
 
-            MainActivity activity = (MainActivity) AdaptadorPaciente.this.context;
+            DisplayInserirPaciente displayInserirPaciente = (DisplayInserirPaciente) AdaptadorPaciente.this.context;
         }
 
         private void seleciona() {

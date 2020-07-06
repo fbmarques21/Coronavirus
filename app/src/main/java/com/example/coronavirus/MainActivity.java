@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void inserirPaciente(View view){
-
         Intent intentInserirPaciente = new Intent(this, DisplayInserirPaciente.class);
         startActivity(intentInserirPaciente);
     }
@@ -28,5 +27,4 @@ public class MainActivity extends AppCompatActivity{
         Intent intentInserirSuspeitos = new Intent(this, DisplayInserirSuspeito.class);
         startActivity(intentInserirSuspeitos);
     }
-
 }

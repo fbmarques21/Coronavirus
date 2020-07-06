@@ -14,4 +14,5 @@
     <string name="guardar_Paciente">Save</string>
     <string name="distrito_lisboa" translatable="false">Lisboa</string>
     <string name="distrito_guarda" translatable="false">Guarda</string>
+    <string name="campo_obrigatorio">Field Required</string>
 </resources>

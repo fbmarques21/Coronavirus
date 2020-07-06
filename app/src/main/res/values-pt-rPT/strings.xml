@@ -44,4 +44,5 @@
     <string name="texto_Distrito">Distrito:</string>
     <string name="texto_Estado">Estado:</string>
     <string name="guardar_Paciente">Guardar</string>
+    <string name="campo_obrigatorio">Campo Obrigatório</string>
 </resources>

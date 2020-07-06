@@ -15,9 +15,10 @@ public class DisplayInserirSuspeito extends AppCompatActivity implements Adapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_inserir_suspeito);
+        Intent intentInserirSuspeitos = getIntent();
     }
 
-    Intent intentInserirSuspeitos = getIntent();
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

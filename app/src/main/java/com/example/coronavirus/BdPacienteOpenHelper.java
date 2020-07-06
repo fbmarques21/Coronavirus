@@ -80,7 +80,6 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
 
         distrito.setNome_distrito(context.getString(R.string.distrito_lisboa));
         tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
-
     }
 
     /**

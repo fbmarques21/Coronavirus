@@ -28,9 +28,10 @@ public class ListaPaciente extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_paciente);
+
+        Intent intentDados = getIntent();
     }
 
-    Intent intentDados = getIntent();
     /**
      * <p>Callback method to be invoked when an item in this view has been
      * selected. This callback is invoked only when the newly selected
