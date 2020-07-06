@@ -56,11 +56,11 @@ public class Converte {
     public static ContentValues pacienteToContentValues(Paciente paciente) {
         ContentValues valores = new ContentValues();
 
-        valores.put(BdTabelNomePaciente.CAMPO_NOME, paciente.getNomePaciente());
-        valores.put(BdTabelNomePaciente.CAMPO_ID_ANO_NASCIMENTO, paciente.getIdAno());
-        valores.put(BdTabelNomePaciente.CAMPO_ID_GENERO, paciente.getIdGenero());
-        valores.put(BdTabelNomePaciente.CAMPO_ID_DISTRITO, paciente.getIdDistrito());
-        valores.put(BdTabelNomePaciente.CAMPO_ID_ESTADO, paciente.getIdDistrito());
+        valores.put(BdTabelPaciente.CAMPO_NOME, paciente.getNomePaciente());
+        valores.put(BdTabelPaciente.CAMPO_ID_ANO_NASCIMENTO, paciente.getIdAno());
+        valores.put(BdTabelPaciente.CAMPO_ID_GENERO, paciente.getIdGenero());
+        valores.put(BdTabelPaciente.CAMPO_ID_DISTRITO, paciente.getIdDistrito());
+        valores.put(BdTabelPaciente.CAMPO_ID_ESTADO, paciente.getIdDistrito());
 
         return valores;
     }
@@ -68,16 +68,16 @@ public class Converte {
     public static Paciente contentValuesToPaciente(ContentValues valores) {
         Paciente paciente = new Paciente();
 
-        paciente.setId(valores.getAsLong(BdTabelNomePaciente._ID));
-        paciente.setNomePaciente(valores.getAsString(BdTabelNomePaciente.CAMPO_NOME));
-        paciente.setIdAno(valores.getAsLong(BdTabelNomePaciente.CAMPO_ID_ANO_NASCIMENTO));
-        paciente.setAno(valores.getAsString(BdTabelNomePaciente.CAMPO_ANO_NASCIMENTO));
-        paciente.setIdGenero(valores.getAsLong(BdTabelNomePaciente.CAMPO_ID_GENERO));
-        paciente.setGenero(valores.getAsString(BdTabelNomePaciente.CAMPO_GENERO));
-        paciente.setIdDistrito(valores.getAsLong(BdTabelNomePaciente.CAMPO_ID_DISTRITO));
-        paciente.setDistrito(valores.getAsString(BdTabelNomePaciente.CAMPO_DISTRITO));
-        paciente.setIdEstado(valores.getAsLong(BdTabelNomePaciente.CAMPO_ID_ESTADO));
-        paciente.setEstado(valores.getAsString(BdTabelNomePaciente.CAMPO_ESTADO));
+        paciente.setId(valores.getAsLong(BdTabelPaciente._ID));
+        paciente.setNomePaciente(valores.getAsString(BdTabelPaciente.CAMPO_NOME));
+        paciente.setIdAno(valores.getAsLong(BdTabelPaciente.CAMPO_ID_ANO_NASCIMENTO));
+        paciente.setAno(valores.getAsString(BdTabelPaciente.CAMPO_ANO_NASCIMENTO));
+        paciente.setIdGenero(valores.getAsLong(BdTabelPaciente.CAMPO_ID_GENERO));
+        paciente.setGenero(valores.getAsString(BdTabelPaciente.CAMPO_GENERO));
+        paciente.setIdDistrito(valores.getAsLong(BdTabelPaciente.CAMPO_ID_DISTRITO));
+        paciente.setDistrito(valores.getAsString(BdTabelPaciente.CAMPO_DISTRITO));
+        paciente.setIdEstado(valores.getAsLong(BdTabelPaciente.CAMPO_ID_ESTADO));
+        paciente.setEstado(valores.getAsString(BdTabelPaciente.CAMPO_ESTADO));
 
         return paciente;
     }
@@ -85,16 +85,16 @@ public class Converte {
     public static Paciente cursorToPaciente(Cursor cursor) {
         Paciente paciente = new Paciente();
 
-        paciente.setId(cursor.getLong(cursor.getColumnIndex(BdTabelNomePaciente._ID)));
-        paciente.setNomePaciente(cursor.getString(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_NOME)));
-        paciente.setIdAno(cursor.getLong(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ID_ANO_NASCIMENTO)));
-        paciente.setAno(cursor.getString(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ANO_NASCIMENTO)));
-        paciente.setIdGenero(cursor.getLong(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ID_GENERO)));
-        paciente.setGenero(cursor.getString(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_GENERO)));
-        paciente.setIdDistrito(cursor.getLong(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ID_DISTRITO)));
-        paciente.setDistrito(cursor.getString(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_DISTRITO)));
-        paciente.setIdEstado(cursor.getLong(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ID_ESTADO)));
-        paciente.setEstado(cursor.getString(cursor.getColumnIndex(BdTabelNomePaciente.CAMPO_ESTADO)));
+        paciente.setId(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente._ID)));
+        paciente.setNomePaciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_NOME)));
+        paciente.setIdAno(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_ANO_NASCIMENTO)));
+        paciente.setAno(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ANO_NASCIMENTO)));
+        paciente.setIdGenero(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_GENERO)));
+        paciente.setGenero(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_GENERO)));
+        paciente.setIdDistrito(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_DISTRITO)));
+        paciente.setDistrito(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_DISTRITO)));
+        paciente.setIdEstado(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_ESTADO)));
+        paciente.setEstado(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ESTADO)));
 
         return paciente;
     }

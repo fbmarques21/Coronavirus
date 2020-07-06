@@ -1,25 +1,17 @@
 package com.example.coronavirus;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
-class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.ViewHolderPaciente> {
+class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolderPaciente> {
     private final Context context;
     private Cursor cursor = null;
 
@@ -30,7 +22,7 @@ class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.ViewHolderPac
         }
     }
 
-    public PacienteAdapter(Context context) {
+    public AdaptadorPaciente(Context context) {
         this.context = context;
     }
 
@@ -154,8 +146,7 @@ class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.ViewHolderPac
             viewHolderPacienteSelecionado = this;
             seleciona();
 
-            MainActivity activity = (MainActivity) PacienteAdapter.this.context;
-            activity.pacienteAlterado(paciente);
+            MainActivity activity = (MainActivity) AdaptadorPaciente.this.context;
         }
 
         private void seleciona() {

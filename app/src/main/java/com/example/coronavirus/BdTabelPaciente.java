@@ -8,36 +8,29 @@ import android.text.TextUtils;
 
 import java.util.Arrays;
 
-public class BdTabelNomePaciente implements BaseColumns {
+public class BdTabelPaciente implements BaseColumns {
     public static final String NOME_TABELA = "paciente";
-
     public static final String CAMPO_NOME = "nome";
-    public static final String CAMPO_ID_ANO_NASCIMENTO = "id_ano";
     public static final String CAMPO_ANO_NASCIMENTO = "ano";
-    public static final String CAMPO_ID_GENERO = "id_genero";
     public static final String CAMPO_GENERO = "genero";
     public static final String CAMPO_ID_DISTRITO = "id_distrito";
     public static final String CAMPO_DISTRITO = "distrito";
-    public static final String CAMPO_ID_ESTADO = "id_estado";
     public static final String CAMPO_ESTADO = "estado";
 
     public static final String CAMPO_ID_COMPLETO = NOME_TABELA + "." + _ID;
-    public static final String CAMPO_NOME_COMPLETO = NOME_TABELA + "." + CAMPO_NOME;
-    public static final String CAMPO_ID_ANO_COMPLETO = NOME_TABELA + "." + CAMPO_ID_ANO_NASCIMENTO;
-    public static final String CAMPO_ANO_NASCIMENTO_COMPLETO = BdTabelAnoNascimento.CAMPO_DESCRICAO_COMPLETO + " AS " + CAMPO_ANO_NASCIMENTO;
-    public static final String CAMPO_ID_GENERO_COMPLETO = NOME_TABELA + "." + CAMPO_ID_GENERO;
-    public static final String CAMPO_GENERO_COMPLETO = BdTabelGenero.CAMPO_DESCRICAO_COMPLETO + " AS " + CAMPO_GENERO;
-    public static final String CAMPO_ID_DISTRITO_COMPLETO = NOME_TABELA + "." + CAMPO_ID_DISTRITO;
-    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.CAMPO_DESCRICAO_COMPLETO + " AS " + CAMPO_DISTRITO;
-    public static final String CAMPO_ID_ESTADO_COMPLETO = NOME_TABELA + "." + CAMPO_ID_ESTADO;
-    public static final String CAMPO_ESTADO_COMPLETO = BdTableEstado.CAMPO_DESCRICAO_COMPLETO + " AS " + CAMPO_ESTADO;
+    public static final String NOME_PACIENTE_COMPLETO = NOME_TABELA + "." + CAMPO_NOME;
+    public static final String CAMPO_ANO_NASCIMENTO_COMPLETO = NOME_TABELA + "." + CAMPO_ANO_NASCIMENTO;
+    public static final String CAMPO_GENERO_COMPLETO = NOME_TABELA + "." + CAMPO_GENERO;
+    public static final String CAMPO_ID_DISTRITO_COMPLETO = BdTableDistrito.CAMPO_ID_COMPLETO + " AS " + CAMPO_ID_DISTRITO;
+    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.NOME_DISTRITO + " AS " + CAMPO_DISTRITO;
+    public static final String CAMPO_ESTADO_COMPLETO = NOME_TABELA + "." + CAMPO_ESTADO;
 
-    public static final String[] TODOS_CAMPOS = {CAMPO_ID_COMPLETO, CAMPO_NOME_COMPLETO, CAMPO_ID_ANO_COMPLETO, CAMPO_ANO_NASCIMENTO_COMPLETO, CAMPO_ID_GENERO_COMPLETO,
-                                                 CAMPO_GENERO_COMPLETO, CAMPO_ID_DISTRITO_COMPLETO, CAMPO_DISTRITO_COMPLETO, CAMPO_ID_ESTADO_COMPLETO, CAMPO_ESTADO_COMPLETO};
+    public static final String[] TODOS_CAMPOS = {CAMPO_ID_COMPLETO, NOME_PACIENTE_COMPLETO, CAMPO_ANO_NASCIMENTO_COMPLETO, CAMPO_GENERO_COMPLETO, CAMPO_ID_DISTRITO_COMPLETO,
+                                               CAMPO_DISTRITO_COMPLETO, CAMPO_ESTADO_COMPLETO};
 
     private SQLiteDatabase db;
 
-    public BdTabelNomePaciente(SQLiteDatabase db) {
+    public BdTabelPaciente(SQLiteDatabase db) {
         this.db = db;
     }
 
@@ -97,31 +90,16 @@ public class BdTabelNomePaciente implements BaseColumns {
     public Cursor query(String[] columns, String selection,
                         String[] selectionArgs, String groupBy, String having,
                         String orderBy) {
-        if (!Arrays.asList(columns).contains(CAMPO_ANO_NASCIMENTO_COMPLETO)) {
-            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
-        }
-        if (!Arrays.asList(columns).contains(CAMPO_GENERO_COMPLETO)) {
-            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
-        }
+
         if (!Arrays.asList(columns).contains(CAMPO_DISTRITO_COMPLETO)) {
             return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
         }
-        if (!Arrays.asList(columns).contains(CAMPO_ESTADO_COMPLETO)) {
-            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
-        }
-
 
         String campos = TextUtils.join(",", columns);
 
         String sql = "SELECT " + campos;
-        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelAnoNascimento.NOME_TABELA;
-        sql += " ON " + CAMPO_ID_ANO_NASCIMENTO + "=" + BdTabelAnoNascimento.CAMPO_ID_COMPLETO;
-        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelGenero.NOME_TABELA;
-        sql += " ON " + CAMPO_ID_GENERO + "=" + BdTabelGenero.CAMPO_ID_COMPLETO;
-        sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTabelAnoNascimento.NOME_TABELA;
-        sql += " ON " + CAMPO_ID_DISTRITO + "=" + BdTableDistrito.CAMPO_ID_COMPLETO;
         sql += " FROM " + NOME_TABELA + " INNER JOIN " + BdTableDistrito.NOME_TABELA;
-        sql += " ON " + CAMPO_ID_ESTADO + "=" + BdTableEstado.CAMPO_ID_COMPLETO;
+        sql += " ON " + CAMPO_ID_DISTRITO + "=" + BdTableDistrito.CAMPO_ID_COMPLETO;
 
         if (selection != null) {
             sql += " WHERE " + selection;

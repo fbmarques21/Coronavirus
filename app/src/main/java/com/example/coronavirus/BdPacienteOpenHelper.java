@@ -9,9 +9,12 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
     public static final String NOME_BASE_DADOS = "paciente.db";
     private static final int VERSAO_BASE_DADOS = 1;
     private static final boolean DESENVOLVIMENTO = true;
+    private final Context context;
 
     public BdPacienteOpenHelper(@Nullable Context context){
         super(context,NOME_BASE_DADOS, null, VERSAO_BASE_DADOS);
+
+        this.context = context;
     }
 
     /**
@@ -22,20 +25,14 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        BdTabelAnoNascimento tabelaAnoNascimento = new BdTabelAnoNascimento(db);
-        tabelaAnoNascimento.cria();
-
-        BdTabelNomePaciente tabelaNomePaciente = new BdTabelNomePaciente(db);
+        BdTabelPaciente tabelaNomePaciente = new BdTabelPaciente(db);
         tabelaNomePaciente.cria();
-
-        BdTabelGenero tabelaGenero = new BdTabelGenero(db);
-        tabelaGenero.cria();
 
         BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
         tabelaDistrito.cria();
 
-        BdTableEstado tabelaEstado = new BdTableEstado(db);
-        tabelaEstado.cria();
+        BdTableSuspeitos tabelaSuspeitos = new BdTableSuspeitos(db);
+        tabelaDistrito.cria();
 
         if (DESENVOLVIMENTO) {
             seedData(db);
@@ -43,66 +40,47 @@ public class BdPacienteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
     }
 
     private void seedData(SQLiteDatabase db) {
-        BdTabelGenero tabelaGenero = new BdTabelGenero(db);
-
-        Genero genero = new Genero();
-        genero.setDescricao("Masculino");
-        long idGenMasc = tabelaGenero.insert(Converte.generoToContentValues(genero));
-
-        genero = new Genero();
-        genero.setDescricao("Feminino");
-        long idGenFem = tabelaGenero.insert(Converte.generoToContentValues(genero));
-
         BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
 
         Distrito distrito = new Distrito();
-        distrito.setDescricao("Guarda");
-        long idDisGua = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
-
-        distrito = new Distrito();
-        distrito.setDescricao("Lisboa");
-        long idDisLis = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
-
-        distrito = new Distrito();
-        distrito.setDescricao("Porto");
-        long idDisPor = tabelaGenero.insert(Converte.distritoToContentValues(distrito));
-
-        BdTableEstado tabelaEstado = new BdTableEstado(db);
-
-        Estado estado = new Estado();
-        estado.setDescricao("Infetado");
-        long idEstInf = tabelaEstado.insert(Converte.estadoToContentValues(estado));
-
-        estado = new Estado();
-        estado.setDescricao("Recuperado");
-        long idEstRec = tabelaEstado.insert(Converte.estadoToContentValues(estado));
-
-        estado = new Estado();
-        estado.setDescricao("Morto");
-        long idEstMor = tabelaEstado.insert(Converte.estadoToContentValues(estado));
-
-        BdTabelNomePaciente tabelaPaciente = new BdTabelNomePaciente(db);
+        distrito.setNome_distrito("Guarda");
+        distrito.setNr_infetados(1);
+        distrito.setNr_mortos(1);
+        distrito.setNr_recuperados(0);
+        long idDisGua = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         Paciente paciente = new Paciente();
         paciente.setNomePaciente("Francisco Marques");
-        paciente.setIdGenero(idGenMasc);
+        paciente.setGenero("Masculino");
         paciente.setIdDistrito(idDisGua);
-        paciente.setIdEstado(idEstInf);
+        paciente.setEstado("Recuperado");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
 
-        paciente = new Paciente();
-        paciente.setNomePaciente("Ana");
-        paciente.setIdGenero(idGenFem);
-        paciente.setIdDistrito(idDisPor);
-        paciente.setIdEstado(idEstRec);
-        tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
+        distrito = new Distrito();
+        distrito.setNome_distrito("Lisboa");
+        distrito.setNr_infetados(1);
+        distrito.setNr_mortos(1);
+        distrito.setNr_recuperados(0);
+        long idLis = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         paciente = new Paciente();
-        paciente.setNomePaciente("Fernando Eduardo");
-        paciente.setIdGenero(idGenMasc);
-        paciente.setIdDistrito(idDisLis);
-        paciente.setIdEstado(idEstMor);
+        paciente.setNomePaciente("Miguel");
+        paciente.setGenero("Masculino");
+        paciente.setIdDistrito(idLis);
+        paciente.setEstado("Morto");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
+    }
+
+    private void inserirConcelho(BdTableDistrito tabelaDistrito) {
+        Distrito distrito = new Distrito();
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_guarda));
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_lisboa));
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
     }
 
     /**

@@ -166,10 +166,10 @@ public class PacienteContentProvider extends ContentProvider {
 
         switch (getUriMatcher().match(uri)) {
             case URI_PACIENTES:
-                return new BdTabelNomePaciente(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
+                return new BdTabelPaciente(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
             case URI_ID_PACIENTES:
-                return new BdTabelNomePaciente(bd).query(projection, BdTabelNomePaciente._ID + "=?", new String[] { id }, null, null, sortOrder);
+                return new BdTabelPaciente(bd).query(projection, BdTabelPaciente._ID + "=?", new String[] { id }, null, null, sortOrder);
 
             case URI_ANO_NASCIMENTO:
                 return new BdTabelAnoNascimento(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
@@ -271,7 +271,7 @@ public class PacienteContentProvider extends ContentProvider {
 
         switch (getUriMatcher().match(uri)) {
             case URI_PACIENTES:
-                id = (new BdTabelNomePaciente(bd).insert(values));
+                id = (new BdTabelPaciente(bd).insert(values));
                 break;
 
             case URI_ANO_NASCIMENTO:
@@ -330,7 +330,7 @@ public class PacienteContentProvider extends ContentProvider {
 
         switch (getUriMatcher().match(uri)) {
             case URI_ID_PACIENTES:
-                return new BdTabelNomePaciente(bd).delete(BdTabelNomePaciente._ID + "=?", new String[]{id});
+                return new BdTabelPaciente(bd).delete(BdTabelPaciente._ID + "=?", new String[]{id});
 
             case URI_ID_ANO_NASCIMENTO:
                 return new BdTabelAnoNascimento(bd).delete(BdTabelAnoNascimento._ID + "=?", new String[] { id });
@@ -375,7 +375,7 @@ public class PacienteContentProvider extends ContentProvider {
 
         switch (getUriMatcher().match(uri)) {
             case URI_ID_PACIENTES:
-                return new BdTabelNomePaciente(bd).update(values, BdTabelNomePaciente._ID + "=?", new String[] { id });
+                return new BdTabelPaciente(bd).update(values, BdTabelPaciente._ID + "=?", new String[] { id });
 
             case URI_ID_ANO_NASCIMENTO:
                 return new BdTabelAnoNascimento(bd).update(values,BdTabelAnoNascimento._ID + "=?", new String[] { id });

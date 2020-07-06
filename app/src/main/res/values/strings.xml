@@ -2,38 +2,6 @@
     <string name="app_name">Coronavirus</string>
     <string name="inserir_Nome">Name</string>
     <string name="inserir_Datadenascimento">Year Of Birth</string>
-
-    <string-array name="genero">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
-
-    <string-array name="distrito">
-        <item>Aveiro</item>
-        <item>Beja</item>
-        <item>Bragança</item>
-        <item>Castelo Branco</item>
-        <item>Coimbra</item>
-        <item>Évora</item>
-        <item>Faro</item>
-        <item>Guarda</item>
-        <item>Leiria</item>
-        <item>Lisboa</item>
-        <item>Portalegre</item>
-        <item>Porto</item>
-        <item>Santarém</item>
-        <item>Setúbal</item>
-        <item>Viana do Castelo</item>
-        <item>Vila Real</item>
-        <item>Viseu</item>
-    </string-array>
-
-    <string-array name="estado">
-        <item>Deceased</item>
-        <item>Infected</item>
-        <item>Recovered</item>
-    </string-array>
-
     <string name="inserir_Paciente">Patient</string>
     <string name="inserir_Suspeito">Suspect</string>
     <string name="consultar_Dados">Data</string>
@@ -44,4 +12,6 @@
     <string name="texto_Distrito">District:</string>
     <string name="texto_Estado">State:</string>
     <string name="guardar_Paciente">Save</string>
+    <string name="distrito_lisboa" translatable="false">Lisboa</string>
+    <string name="distrito_guarda" translatable="false">Guarda</string>
 </resources>

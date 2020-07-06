@@ -3,13 +3,10 @@ package com.example.coronavirus;
 public class Paciente {
     private long id = -1;
     private String nomePaciente;
-    private long idAno = -1;
     private String Ano;
-    private long idGenero = -1;
     private String genero;
     private long idDistrito = -1;
     private String Distrito;
-    private long idEstado = -1;
     private String estado;
 
     public long getId() {
@@ -28,28 +25,12 @@ public class Paciente {
         this.nomePaciente = nomePaciente;
     }
 
-    public long getIdAno() {
-        return idAno;
-    }
-
-    public void setIdAno(long idAno) {
-        this.idAno = idAno;
-    }
-
     public String getAno() {
         return Ano;
     }
 
     public void setAno(String ano) {
         Ano = ano;
-    }
-
-    public long getIdGenero() {
-        return idGenero;
-    }
-
-    public void setIdGenero(long idGenero) {
-        this.idGenero = idGenero;
     }
 
     public String getGenero() {
@@ -74,14 +55,6 @@ public class Paciente {
 
     public void setDistrito(String distrito) {
         Distrito = distrito;
-    }
-
-    public long getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(long idEstado) {
-        this.idEstado = idEstado;
     }
 
     public String getEstado() {

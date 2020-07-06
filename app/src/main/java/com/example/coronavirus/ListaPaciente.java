@@ -20,10 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
-public class ListaPacienteFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListaPaciente extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final int ID_CURSOR_LOADER = 0;
 
-    private PacienteAdapter pacienteAdapter;
+    private AdaptadorPaciente pacienteAdapter;
 
     @Override
     public View onCreateView(
@@ -31,7 +31,7 @@ public class ListaPacienteFragment extends Fragment implements LoaderManager.Loa
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_paciente, container, false);
+        return inflater.inflate(R.layout.lista_paciente, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class ListaPacienteFragment extends Fragment implements LoaderManager.Loa
 
         MainActivity activity = (MainActivity) getActivity();
         activity.setFragmentActual(this);
-        activity.setMenuActual(R.layout.fragment_lista_paciente);
+        activity.setMenuActual(R.layout.lista_paciente);
 
         RecyclerView recyclerViewPaciente = (RecyclerView) view.findViewById(R.id.recyclerViewPaciente);
-        pacienteAdapter = new PacienteAdapter(context);
+        pacienteAdapter = new AdaptadorPaciente(context);
         recyclerViewPaciente.setAdapter(pacienteAdapter);
         recyclerViewPaciente.setLayoutManager(new LinearLayoutManager(context));
 
@@ -54,17 +54,17 @@ public class ListaPacienteFragment extends Fragment implements LoaderManager.Loa
     }
 
     public void alteraLivro() {
-        NavController navController = NavHostFragment.findNavController(ListaPacienteFragment.this);
+        NavController navController = NavHostFragment.findNavController(ListaPaciente.this);
         navController.navigate(R.id.action_alterar_paciente);
     }
 
     public void novoLivro() {
-        NavController navController = NavHostFragment.findNavController(ListaPacienteFragment.this);
+        NavController navController = NavHostFragment.findNavController(ListaPaciente.this);
         navController.navigate(R.id.action_novo_paciente);
     }
 
     public void eliminaLivro() {
-        NavController navController = NavHostFragment.findNavController(ListaPacienteFragment.this);
+        NavController navController = NavHostFragment.findNavController(ListaPaciente.this);
         navController.navigate(R.id.action_eliminar_paciente);
     }
 
