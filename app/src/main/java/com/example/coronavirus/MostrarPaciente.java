@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CursorAdapter;
 
 public class MostrarPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -29,6 +31,25 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
         setContentView(R.layout.activity_mostrar_paciente);
         Intent intentMostrarPaciente = getIntent();
 
+        recyclerViewPaciente = (RecyclerView) findViewById(R.id.RecyclerViewPaciente);
+        adaptadorPaciente = new AdaptadorPaciente(this);
+        recyclerViewPaciente.setAdapter(adaptadorPaciente);
+        recyclerViewPaciente.setLayoutManager(new LinearLayoutManager(this));
+
+        adaptadorPaciente.setCursor(null);
+
+        LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PACIENTE, null, this);
+    }
+
+    public void inserirDoente (View view){
+        Intent intentInserirPaciente = new Intent(this, DisplayInserirPaciente.class);
+        startActivity(intentInserirPaciente);
+    }
+
+    @Override
+    protected void onResume(){
+        getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_PACIENTE,null,this);
+        super.onResume();
     }
 
     /**
@@ -43,7 +64,7 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+        return  new androidx.loader.content.CursorLoader(this, PacienteContentProvider.ENDERECO_PACIENTES, BdTabelPaciente.TODOS_CAMPOS_PACIENTE, null, null, BdTabelPaciente.NOME_PACIENTE);
     }
 
     /**
@@ -89,7 +110,7 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+        adaptadorPaciente.setCursor(data);
     }
 
     /**
@@ -103,6 +124,6 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-
+        adaptadorPaciente.setCursor(null);
     }
 }
