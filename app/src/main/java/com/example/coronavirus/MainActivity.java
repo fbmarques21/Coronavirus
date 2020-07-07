@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
     }
     public void mostrarSuspeito(View view){
 
-        Intent intentMostrarSuspeitos = new Intent(this, MostrarPaciente.class);
+        Intent intentMostrarSuspeitos = new Intent(this, MostrarSuspeito.class);
         startActivity(intentMostrarSuspeitos);
     }
 }

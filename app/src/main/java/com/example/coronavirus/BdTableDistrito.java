@@ -27,16 +27,17 @@ public class BdTableDistrito implements BaseColumns {
     public BdTableDistrito(SQLiteDatabase db) {
         this.db = db;
     }
-    public void cria() {
-        db.execSQL("CREATE TABLE " + NOME_TABELA + " (" +
+    public void cria(){
+        String sql = ("CREATE TABLE " + NOME_TABELA + " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NOME_DISTRITO + " TEXT NOT NULL, " +
-                NR_INFETADOS_DISTRITO + " INTEGER DEFAULT 0," +
-                NR_RECUPERADOS_DISTRITO +  " INTEGER DEFAULT 0," +
-                NR_MORTOS_DISTRITO + " INTEGER DEFAULT 0," +
+                NR_INFETADOS_DISTRITO + " INTEGER NOT NULL," +
+                NR_RECUPERADOS_DISTRITO +  " INTEGER NOT NULL," +
+                NR_MORTOS_DISTRITO + " INTEGER NOT NULL," +
                 NR_HABITANTES_COMPLETO + " INTEGER NOT NULL" +
                 ")"
         );
+        db.execSQL(sql);
     }
 
     /**

@@ -25,14 +25,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayInserirPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class InserirPaciente2 extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerDistrito;
     public static final int ID_CURSOR_LOADER_DISTRITO = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.display_inserir_paciente);
+        setContentView(R.layout.activity_inserir_paciente2);
         Intent intentInserirPaciente = getIntent();
 
         Spinner dropdowngenero;
@@ -42,18 +42,6 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         genero.add(getString(R.string.GeneroM));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
         dropdowngenero.setAdapter(adapter);
-
-        dropdowngenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         spinnerDistrito = (Spinner) findViewById(R.id.spinnerDistrito);
         mostrarDadosSpinnerDistrito(null);
@@ -67,17 +55,6 @@ public class DisplayInserirPaciente extends AppCompatActivity implements LoaderM
         Estado.add(getString(R.string.EstadoMorto));
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Estado);
         dropdownEstado.setAdapter(adapter3);
-        dropdownEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void mostrarDadosSpinnerDistrito(Cursor data) {

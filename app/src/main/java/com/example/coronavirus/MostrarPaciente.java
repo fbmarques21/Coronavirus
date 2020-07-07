@@ -41,8 +41,8 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
         LoaderManager.getInstance(this).initLoader(ID_CURSOR_LOADER_PACIENTE, null, this);
     }
 
-    public void inserirDoente (View view){
-        Intent intentInserirPaciente = new Intent(this, DisplayInserirPaciente.class);
+    public void inserirPaciente (View view){
+        Intent intentInserirPaciente = new Intent(this, InserirPaciente2.class);
         startActivity(intentInserirPaciente);
     }
 

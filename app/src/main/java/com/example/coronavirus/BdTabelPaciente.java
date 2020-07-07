@@ -21,8 +21,8 @@ public class BdTabelPaciente implements BaseColumns {
     public static final String NOME_PACIENTE_COMPLETO = NOME_TABELA + "." + NOME_PACIENTE;
     public static final String ANO_NASCIMENTO_PACIENTE_COMPLETO = NOME_TABELA + "." + ANO_NASCIMENTO_PACIENTE;
     public static final String GENERO_PACIENTE_COMPLETO = NOME_TABELA + "." + GENERO_PACIENTE;
-    public static final String CAMPO_ID_DISTRITO_COMPLETO = BdTableDistrito.CAMPO_ID_COMPLETO + " AS " + CAMPO_ID_DISTRITO;
-    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.NOME_DISTRITO + " AS " + DISTRITO_PACIENTE;
+    public static final String CAMPO_ID_DISTRITO_COMPLETO = BdTableDistrito.CAMPO_ID_COMPLETO + "." + CAMPO_ID_DISTRITO;
+    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.NOME_DISTRITO + "." + DISTRITO_PACIENTE;
     public static final String ESTADO_PACIENTE_COMPLETO = NOME_TABELA + "." + ESTADO_PACIENTE;
 
     public static final String[] TODOS_CAMPOS_PACIENTE = {CAMPO_ID_COMPLETO, NOME_PACIENTE_COMPLETO, ANO_NASCIMENTO_PACIENTE_COMPLETO, GENERO_PACIENTE_COMPLETO, CAMPO_ID_DISTRITO_COMPLETO,
@@ -51,7 +51,34 @@ public class BdTabelPaciente implements BaseColumns {
         return db.insert(NOME_TABELA, null, values);
     }
 
-
+    /**
+     * Query the given table, returning a {@link Cursor} over the result set.
+     *
+     *
+     * @param columns A list of which columns to return. Passing null will
+     *            return all columns, which is discouraged to prevent reading
+     *            data from storage that isn't going to be used.
+     * @param selection A filter declaring which rows to return, formatted as an
+     *            SQL WHERE clause (excluding the WHERE itself). Passing null
+     *            will return all rows for the given table.
+     * @param selectionArgs You may include ?s in selection, which will be
+     *         replaced by the values from selectionArgs, in order that they
+     *         appear in the selection. The values will be bound as Strings.
+     * @param groupBy A filter declaring how to group rows, formatted as an SQL
+     *            GROUP BY clause (excluding the GROUP BY itself). Passing null
+     *            will cause the rows to not be grouped.
+     * @param having A filter declare which row groups to include in the cursor,
+     *            if row grouping is being used, formatted as an SQL HAVING
+     *            clause (excluding the HAVING itself). Passing null will cause
+     *            all row groups to be included, and is required when row
+     *            grouping is not being used.
+     * @param orderBy How to order the rows, formatted as an SQL ORDER BY clause
+     *            (excluding the ORDER BY itself). Passing null will use the
+     *            default sort order, which may be unordered.
+     * @return A {@link Cursor} object, which is positioned before the first entry. Note that
+     * {@link Cursor}s are not synchronized, see the documentation for more details.
+     * @see Cursor
+     */
     public Cursor query(String[] columns, String selection,
                         String[] selectionArgs, String groupBy, String having,
                         String orderBy) {
