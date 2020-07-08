@@ -159,5 +159,218 @@ public class BdPacienteTest {
         return id;
     }
 
+    private long inserePaciente(BdTabelPaciente tabelaPaciente, String nome, String ano_nascimento, long distrito, String genero, String estado) {
+        Paciente paciente = new Paciente();
+        paciente.setNome_paciente(nome);
+        paciente.setAno_nascimento_paciente(ano_nascimento);
+        paciente.setId_distrito(distrito);
+        paciente.setGenero_paciente(genero);
+        paciente.setEstado_paciente(estado);
+        return inserePaciente(tabelaPaciente, paciente);
+    }
+
+    @Test
+    public void concegueInserirPaciente() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
+        getTableAsString(db, "Distrito");
+        Cursor cursor = tabelaPaciente.query(BdTabelPaciente.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
+        int registos = cursor.getCount();
+        cursor.close();
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        inserePaciente(tabelaPaciente, "Francisco", "2000", id_distrito, "Masculino", "Recuperado");
+        cursor = tabelaPaciente.query(BdTabelPaciente.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
+        assertEquals(registos + 1, cursor.getCount());
+        cursor.close();
+        db.close();
+    }
+
+    @Test
+    public void consegueAlterarPaciente() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase bdPaciente = openHelper.getWritableDatabase();
+
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(bdPaciente);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(bdPaciente);
+
+        Paciente paciente = new Paciente();
+        paciente.setNome_paciente("Francisco");
+        paciente.setAno_nascimento_paciente("2000");
+        long id_distrito = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito = ?", new String[]{"Guarda"}, null, null, null).getColumnIndex("_id");
+        paciente.setId_distrito(id_distrito);
+        paciente.setGenero_paciente("Masculino");
+        paciente.setEstado_paciente("Recuperado");
+        long id = inserePaciente(tabelaPaciente, paciente);
+
+        paciente.setNome_paciente("Ana");
+        paciente.setAno_nascimento_paciente("1999");
+        id_distrito = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito = ?", new String[]{"Lisboa"}, null, null, null).getColumnIndex("_id");
+        paciente.setId_distrito(id_distrito);
+        paciente.setGenero_paciente("Feminino");
+        paciente.setEstado_paciente("Recuperado");
+        int registosAlterados = tabelaPaciente.update(Converte.pacienteToContentValues(paciente), BdTabelPaciente._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosAlterados);
+        bdPaciente.close();
+    }
+
+    @Test
+    public void consegueApagarPaciente() {
+        Context appContext = getTargetContext();
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        long id = inserePaciente(tabelaPaciente, "Francisco", "2000", id_distrito, "Masculino", "Recuperado");
+        int registosApagados = tabelaPaciente.delete(BdTabelPaciente._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosApagados);
+        db.close();
+    }
+
+    @Test
+    public void consegueLerPaciente() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+
+        Cursor cursor = tabelaPaciente.query(BdTabelPaciente.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
+        int registos = cursor.getCount();
+        cursor.close();
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        inserePaciente(tabelaPaciente, "Francisco", "2000", id_distrito, "Masculino", "Recuperado");
+        cursor = tabelaPaciente.query(BdTabelPaciente.TODOS_CAMPOS_PACIENTE, null, null, null, null, null);
+        assertEquals(registos + 1, cursor.getCount());
+        cursor.close();
+        db.close();
+    }
+
+    private long insereSuspeito(BdTableSuspeitos tabelaSuspeito, Suspeito suspeito) {
+        long id = tabelaSuspeito.insert(Converte.suspeitoToContentValues(suspeito));
+        assertNotEquals(-1, id);
+        return id;
+    }
+
+    private long insereSuspeito(BdTableSuspeitos tabelaSuspeito, String nome, String ano_nascimento, long distrito, String genero) {
+        Suspeito suspeito = new Suspeito();
+        suspeito.setNomeSuspeito(nome);
+        suspeito.setAno(ano_nascimento);
+        suspeito.setIdDistrito(distrito);
+        suspeito.setGenero(genero);
+        return insereSuspeito(tabelaSuspeito, suspeito);
+    }
+
+    @Test
+    public void concegueInserirSuspeito() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+        BdTableSuspeitos tabelaSuspeito = new BdTableSuspeitos(db);
+        getTableAsString(db, "Distrito");
+        Cursor cursor = tabelaSuspeito.query(BdTableSuspeitos.TODOS_CAMPOS_SUSPEITO, null, null, null, null, null);
+        int registos = cursor.getCount();
+        cursor.close();
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        insereSuspeito(tabelaSuspeito, "Miguel", "2000", id_distrito, "Masculino");
+        cursor = tabelaSuspeito.query(BdTableSuspeitos.TODOS_CAMPOS_SUSPEITO, null, null, null, null, null);
+        assertEquals(registos + 1, cursor.getCount());
+        cursor.close();
+        db.close();
+    }
+
+    @Test
+    public void consegueAlterarSuspeito() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase bdSuspeito = openHelper.getWritableDatabase();
+
+        BdTableSuspeitos tabelaSuspeito = new BdTableSuspeitos(bdSuspeito);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(bdSuspeito);
+
+        Suspeito suspeito = new Suspeito();
+        suspeito.setNomeSuspeito("Miguel");
+        suspeito.setAno("2000");
+        long id_distrito = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito = ?", new String[]{"Guarda"}, null, null, null).getColumnIndex("_id");
+        suspeito.setIdDistrito(id_distrito);
+        suspeito.setGenero("Masculino");
+        long id = insereSuspeito(tabelaSuspeito, suspeito);
+
+        suspeito.setNomeSuspeito("Rute");
+        suspeito.setAno("1999");
+        id_distrito = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito = ?", new String[]{"Lisboa"}, null, null, null).getColumnIndex("_id");
+        suspeito.setIdDistrito(id_distrito);
+        suspeito.setGenero("Feminino");
+        int registosAlterados = tabelaSuspeito.update(Converte.suspeitoToContentValues(suspeito), BdTableSuspeitos._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosAlterados);
+        bdSuspeito.close();
+    }
+
+    @Test
+    public void consegueApagarSuspeito() {
+        Context appContext = getTargetContext();
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+
+        BdTableSuspeitos tabelaSuspeito = new BdTableSuspeitos(db);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        long id = insereSuspeito(tabelaSuspeito, "Miguel", "2000", id_distrito, "Masculino");
+        int registosApagados = tabelaSuspeito.delete(BdTableSuspeitos._ID + "=?", new String[]{String.valueOf(id)});
+        assertEquals(1, registosApagados);
+        db.close();
+    }
+
+    @Test
+    public void consegueLerSuspeito() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase db = openHelper.getWritableDatabase();
+        BdTableSuspeitos tabelaSuspeito = new BdTableSuspeitos(db);
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
+
+        Cursor cursor = tabelaSuspeito.query(BdTableSuspeitos.TODOS_CAMPOS_SUSPEITO, null, null, null, null, null);
+        int registos = cursor.getCount();
+        cursor.close();
+        Cursor cursor1 = tabelaDistrito.query(new String[]{"_id"}, "nome_distrito =?", new String[]{"Guarda"}, null, null, null);
+        long id_distrito = -1;
+        if(cursor1 != null && cursor1.moveToFirst())
+            id_distrito = cursor1.getInt(cursor1.getColumnIndex("_id"));
+        insereSuspeito(tabelaSuspeito, "Miguel", "2000", id_distrito, "Masculino");
+        cursor = tabelaSuspeito.query(BdTableSuspeitos.TODOS_CAMPOS_SUSPEITO, null, null, null, null, null);
+        assertEquals(registos + 1, cursor.getCount());
+        cursor.close();
+        db.close();
+    }
+
 
 }

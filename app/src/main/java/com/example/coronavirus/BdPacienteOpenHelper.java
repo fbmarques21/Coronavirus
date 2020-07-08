@@ -89,12 +89,77 @@ public class BdPacienteOpenHelper extends SQLiteOpenHelper {
     private void inserirDistrito(BdTableDistrito tabelaDistrito) {
         Distrito distrito = new Distrito();
 
+        distrito.setNome_distrito(context.getString(R.string.distrito_aveiro));
+        distrito.setNr_habitantes(714200);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_beja));
+        distrito.setNr_habitantes(152758);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_braga));
+        distrito.setNr_habitantes(956185);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_braganca));
+        distrito.setNr_habitantes(136252);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_castelo_branco));
+        distrito.setNr_habitantes(196264);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_coimbra));
+        distrito.setNr_habitantes(429987);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_evora));
+        distrito.setNr_habitantes(168034);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_faro));
+        distrito.setNr_habitantes(434023);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
         distrito.setNome_distrito(context.getString(R.string.distrito_guarda));
-        distrito.setNr_habitantes(42531);
+        distrito.setNr_habitantes(168898);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_leiria));
+        distrito.setNr_habitantes(470895);
         tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         distrito.setNome_distrito(context.getString(R.string.distrito_lisboa));
         distrito.setNr_habitantes(2265832);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_portalegre));
+        distrito.setNr_habitantes(118506);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_porto));
+        distrito.setNr_habitantes(1778146);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_santarem));
+        distrito.setNr_habitantes(465701);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_setubal));
+        distrito.setNr_habitantes(911794);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_viana_do_castelo));
+        distrito.setNr_habitantes(240133);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_vila_real));
+        distrito.setNr_habitantes(213775);
+        tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+
+
+        distrito.setNome_distrito(context.getString(R.string.distrito_viseu));
+        distrito.setNr_habitantes(391215);
         tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
     }
 

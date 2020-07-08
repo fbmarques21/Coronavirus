@@ -12,8 +12,24 @@
     <string name="texto_Distrito">District:</string>
     <string name="texto_Estado">State:</string>
     <string name="guardar_Paciente">Save</string>
-    <string name="distrito_lisboa" translatable="false">Lisboa</string>
+    <string name="distrito_aveiro" translatable="false">Aveiro</string>
+    <string name="distrito_beja" translatable="false">Beja</string>
+    <string name="distrito_braga" translatable="false">Braga</string>
+    <string name="distrito_braganca" translatable="false">Bragança</string>
+    <string name="distrito_castelo_branco" translatable="false">Castelo Branco</string>
+    <string name="distrito_coimbra" translatable="false">Coimbra</string>
+    <string name="distrito_evora" translatable="false">Évora</string>
+    <string name="distrito_faro" translatable="false">Faro</string>
     <string name="distrito_guarda" translatable="false">Guarda</string>
+    <string name="distrito_leiria" translatable="false">Leiria</string>
+    <string name="distrito_lisboa" translatable="false">Lisboa</string>
+    <string name="distrito_portalegre" translatable="false">Portalegre</string>
+    <string name="distrito_porto" translatable="false">Porto</string>
+    <string name="distrito_santarem" translatable="false">Santarém</string>
+    <string name="distrito_setubal" translatable="false">Setúbal</string>
+    <string name="distrito_viana_do_castelo" translatable="false">Viana do Castelo</string>
+    <string name="distrito_vila_real" translatable="false">Vila Real</string>
+    <string name="distrito_viseu" translatable="false">Viseu</string>
     <string name="campo_obrigatorio">Field Required</string>
     <string name="GeneroF">Woman</string>
     <string name="GeneroM">Man</string>
