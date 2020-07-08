@@ -7,19 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public class BdTableDistrito implements BaseColumns {
-    public static String NOME_TABELA = "distrito";
+    public static String NOME_TABELA_DISTRITO = "distrito";
     public static String NOME_DISTRITO = "nome_distrito";
     public static String NR_INFETADOS_DISTRITO = "nr_infetados";
     public static String NR_RECUPERADOS_DISTRITO = "nr_recuperados";
     public static String NR_MORTOS_DISTRITO = "nr_mortos";
     public static String NR_HABITANTES_DISTRITO = "nr_habitantes";
 
-    public static String CAMPO_ID_COMPLETO = NOME_TABELA + "." + _ID;
-    public static String NOME_DISTRITO_COMPLETO = NOME_TABELA + "." + NOME_DISTRITO;
-    public static String NR_INFETADOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_INFETADOS_DISTRITO;
-    public static String NR_RECUPERADOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_RECUPERADOS_DISTRITO;
-    public static String NR_MORTOS_DISTRITO_COMPLETO = NOME_TABELA + "." + NR_MORTOS_DISTRITO;
-    public static String NR_HABITANTES_COMPLETO = NOME_TABELA + "." + NR_HABITANTES_DISTRITO;
+    public static String CAMPO_ID_COMPLETO = NOME_TABELA_DISTRITO + "." + _ID;
+    public static String NOME_DISTRITO_COMPLETO = NOME_TABELA_DISTRITO + "." + NOME_DISTRITO;
+    public static String NR_INFETADOS_DISTRITO_COMPLETO = NOME_TABELA_DISTRITO + "." + NR_INFETADOS_DISTRITO;
+    public static String NR_RECUPERADOS_DISTRITO_COMPLETO = NOME_TABELA_DISTRITO + "." + NR_RECUPERADOS_DISTRITO;
+    public static String NR_MORTOS_DISTRITO_COMPLETO = NOME_TABELA_DISTRITO + "." + NR_MORTOS_DISTRITO;
+    public static String NR_HABITANTES_COMPLETO = NOME_TABELA_DISTRITO + "." + NR_HABITANTES_DISTRITO;
 
     public static final String[] TODOS_CAMPOS_DISTRITO = {_ID, NOME_DISTRITO, NR_INFETADOS_DISTRITO, NR_RECUPERADOS_DISTRITO, NR_MORTOS_DISTRITO};
     private SQLiteDatabase db;
@@ -28,16 +28,14 @@ public class BdTableDistrito implements BaseColumns {
         this.db = db;
     }
     public void cria(){
-        String sql = ("CREATE TABLE " + NOME_TABELA + " (" +
-                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                NOME_DISTRITO + " TEXT NOT NULL, " +
+        db.execSQL("CREATE TABLE " + NOME_TABELA_DISTRITO + "(" +
+                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                NOME_DISTRITO + " TEXT NOT NULL," +
                 NR_INFETADOS_DISTRITO + " INTEGER NOT NULL," +
                 NR_RECUPERADOS_DISTRITO +  " INTEGER NOT NULL," +
                 NR_MORTOS_DISTRITO + " INTEGER NOT NULL," +
-                NR_HABITANTES_COMPLETO + " INTEGER NOT NULL" +
-                ")"
-        );
-        db.execSQL(sql);
+                NR_HABITANTES_DISTRITO + " INTEGER NOT NULL" +
+                ")");
     }
 
     /**
@@ -49,7 +47,7 @@ public class BdTableDistrito implements BaseColumns {
      * @return the row ID of the newly inserted row, or -1 if an error occurred
      */
     public long insert(ContentValues values) {
-        return db.insert(NOME_TABELA, null, values);
+        return db.insert(NOME_TABELA_DISTRITO, null, values);
     }
 
     /**
@@ -82,7 +80,7 @@ public class BdTableDistrito implements BaseColumns {
     public Cursor query(String[] columns, String selection,
                         String[] selectionArgs, String groupBy, String having,
                         String orderBy) {
-        return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy);
+        return db.query(NOME_TABELA_DISTRITO, columns, selection, selectionArgs, groupBy, having, orderBy);
     }
 
     /**
@@ -98,7 +96,7 @@ public class BdTableDistrito implements BaseColumns {
      * @return the number of rows affected
      */
     public int update(ContentValues values, String whereClause, String[] whereArgs) {
-        return db.update(NOME_TABELA, values, whereClause, whereArgs);
+        return db.update(NOME_TABELA_DISTRITO, values, whereClause, whereArgs);
     }
 
     /**
@@ -114,6 +112,6 @@ public class BdTableDistrito implements BaseColumns {
      *         whereClause.
      */
     public int delete(String whereClause, String[] whereArgs) {
-        return db.delete(NOME_TABELA, whereClause, whereArgs);
+        return db.delete(NOME_TABELA_DISTRITO, whereClause, whereArgs);
     }
 }

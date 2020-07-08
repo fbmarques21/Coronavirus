@@ -34,4 +34,32 @@ public class BdPacienteTest {
         assertTrue(bd.isOpen());
         bd.close();
     }
+
+    private long insereDistrito(BdTableDistrito tabelaDistrito, Distrito distrito) {
+        long id = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
+        assertNotEquals(-1, id);
+
+        return id;
+    }
+
+    private long insereDistrito(BdTableDistrito tabelaDistrito, String nomeDistrito) {
+        Distrito distrito = new Distrito();
+        distrito.setNome_distrito(nomeDistrito);
+
+        return insereDistrito(tabelaDistrito, distrito);
+    }
+
+    @Test
+    public void consegueInserirCategorias() {
+        Context appContext = getTargetContext();
+
+        BdPacienteOpenHelper openHelper = new BdPacienteOpenHelper(appContext);
+        SQLiteDatabase bdPaciente = openHelper.getWritableDatabase();
+
+        BdTableDistrito tabelaDistrito = new BdTableDistrito(bdPaciente);
+
+        insereDistrito(tabelaDistrito, "Guarda");
+
+        bdPaciente.close();
+    }
 }

@@ -14,6 +14,10 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
     private final Context context;
     private Cursor cursor = null;
 
+    public AdaptadorPaciente(Context context) {
+        this.context = context;
+    }
+
     public void setCursor(Cursor cursor) {
         if (cursor != this.cursor) {
             this.cursor = cursor;
@@ -21,16 +25,10 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
         }
     }
 
-    public AdaptadorPaciente(Context context) {
-        this.context = context;
-    }
-
-
     @NonNull
     @Override
     public ViewHolderPaciente onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemPaciente = LayoutInflater.from(context).inflate(R.layout.item_paciente, parent, false);
-
         return new ViewHolderPaciente(itemPaciente);
     }
 
@@ -78,13 +76,18 @@ class AdaptadorPaciente extends RecyclerView.Adapter<AdaptadorPaciente.ViewHolde
 
         public void setPaciente(Paciente paciente) {
             this.paciente = paciente;
-            textViewNome.setText(paciente.getNomePaciente());
-            textViewAno.setText(String.valueOf(paciente.getAno()));
-            textViewGenero.setText(paciente.getGenero());
-            textViewDistrito.setText(String.valueOf(paciente.getIdDistrito()));
-            textViewEstado.setText(paciente.getEstado());
+            textViewNome.setText(paciente.getNome_paciente());
+            textViewAno.setText(String.valueOf(paciente.getAno_nascimento_paciente()));
+            textViewGenero.setText(paciente.getGenero_paciente());
+            textViewDistrito.setText(String.valueOf(paciente.getId_distrito()));
+            textViewEstado.setText(paciente.getEstado_paciente());
         }
 
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
         @Override
         public void onClick(View v) {
             if (viewHolderPacienteSelecionado == this) {

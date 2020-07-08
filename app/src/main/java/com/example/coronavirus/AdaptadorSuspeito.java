@@ -46,11 +46,10 @@ public class AdaptadorSuspeito extends RecyclerView.Adapter<AdaptadorSuspeito.Vi
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(ViewHolder, int)
      */
-    @NonNull
+  @NonNull
     @Override
     public ViewHolderSuspeito onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemSuspeito = LayoutInflater.from(context).inflate(R.layout.item_suspeito, parent, false);
-
         return new AdaptadorSuspeito.ViewHolderSuspeito(itemSuspeito);
     }
 
@@ -74,7 +73,7 @@ public class AdaptadorSuspeito extends RecyclerView.Adapter<AdaptadorSuspeito.Vi
      *                 item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    @Override
+   @Override
     public void onBindViewHolder(@NonNull ViewHolderSuspeito holder, int position) {
         cursor.moveToPosition(position);
         Suspeito suspeito = Converte.cursorToSuspeito(cursor);
@@ -94,7 +93,7 @@ public class AdaptadorSuspeito extends RecyclerView.Adapter<AdaptadorSuspeito.Vi
         return cursor.getCount();
     }
 
-    private AdaptadorSuspeito.ViewHolderSuspeito viewHolderSuspeitoSelecionado = null;
+    private ViewHolderSuspeito viewHolderSuspeitoSelecionado = null;
 
     public Suspeito getSuspeitoSelecionado() {
         if (viewHolderSuspeitoSelecionado == null) return null;

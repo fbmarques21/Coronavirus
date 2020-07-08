@@ -1,6 +1,6 @@
 package com.example.coronavirus;
 
-public class Distrito {
+public class    Distrito {
     private long id = -1;
     private String nome_distrito;
     private Integer nr_infetados = 0;

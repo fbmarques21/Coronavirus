@@ -26,7 +26,7 @@
 
         <provider
             android:name=".PacienteContentProvider"
-            android:authorities="pt.example.coronavirus"
+            android:authorities="com.example.coronavirus"
             android:exported="false" />
     </application>
 

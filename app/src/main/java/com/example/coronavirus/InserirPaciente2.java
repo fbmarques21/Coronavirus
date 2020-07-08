@@ -25,7 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InserirPaciente2 extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class InserirPaciente2<adapter> extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerDistrito;
     public static final int ID_CURSOR_LOADER_DISTRITO = 0;
 
@@ -35,13 +35,14 @@ public class InserirPaciente2 extends AppCompatActivity implements LoaderManager
         setContentView(R.layout.activity_inserir_paciente2);
         Intent intentInserirPaciente = getIntent();
 
-        Spinner dropdowngenero;
-        dropdowngenero = (Spinner) findViewById(R.id.spinnerGenero);
+        Spinner dropdownGenero;
+        dropdownGenero = (Spinner) findViewById(R.id.spinnerGenero);
         final List<String> genero = new ArrayList<>();
         genero.add(getString(R.string.GeneroF));
         genero.add(getString(R.string.GeneroM));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
-        dropdowngenero.setAdapter(adapter);
+        dropdownGenero.setAdapter(adapter);
 
         spinnerDistrito = (Spinner) findViewById(R.id.spinnerDistrito);
         mostrarDadosSpinnerDistrito(null);
@@ -79,18 +80,18 @@ public class InserirPaciente2 extends AppCompatActivity implements LoaderManager
             TextEditNome.requestFocus();
             return;
         }
-        else if ((ano.length() != 9)) {
+        else if ((ano.length() != 4)) {
             TextEditAno.setError(getString(R.string.campo_obrigatorio));
             TextEditAno.requestFocus();
         }else {
             long idDistrito = spinnerDistrito.getSelectedItemId();
 
             Paciente paciente = new Paciente();
-            paciente.setNomePaciente(nome);
-            paciente.setAno("data");
-            paciente.setGenero(genero);
-            paciente.setIdDistrito(idDistrito);
-            paciente.setEstado(estado);
+            paciente.setNome_paciente(nome);
+            paciente.setAno_nascimento_paciente("data");
+            paciente.setGenero_paciente(genero);
+            paciente.setId_distrito(idDistrito);
+            paciente.setEstado_paciente(estado);
             try {
                 this.getContentResolver().insert(PacienteContentProvider.ENDERECO_PACIENTES, Converte.pacienteToContentValues(paciente));
                 Toast.makeText(this, "Paciente inserido com sucesso", Toast.LENGTH_SHORT).show();

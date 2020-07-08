@@ -87,7 +87,6 @@ public class PacienteContentProvider extends android.content.ContentProvider {
      * Implement this to handle query requests from clients.
      *
      * <p>Apps targeting {@link Build.VERSION_CODES#O} or higher should override
-     * {@link #query(Uri, String[], Bundle, CancellationSignal)} and provide a stub
      * implementation of this method.
      *
      * <p>This method can be called from multiple threads, as described in
@@ -161,14 +160,13 @@ public class PacienteContentProvider extends android.content.ContentProvider {
                 return new BdTabelPaciente(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
             case URI_ID_PACIENTES:
-                return new BdTabelPaciente(bd).query(projection, BdTabelPaciente._ID + "=?", new String[] { id }, null, null, sortOrder);
+                return new BdTabelPaciente(bd).query(projection, BdTabelPaciente._ID + "=?", new String[]{ id }, null, null, sortOrder);
 
             case URI_SUSPEITOS:
                 return new BdTableSuspeitos(bd).query(projection, selection, selectionArgs, null, null, sortOrder);
 
             case URI_ID_SUSPEITOS:
                 return new BdTableSuspeitos(bd).query(projection, BdTableSuspeitos._ID + "=?", new String[] { id }, null, null, sortOrder);
-
 
             default:
                 throw new UnsupportedOperationException("Endereço query inválido: " + uri.getPath());
@@ -218,8 +216,7 @@ public class PacienteContentProvider extends android.content.ContentProvider {
 
     /**
      * Implement this to handle requests to insert a new row.
-     * As a courtesy, call {@link ContentResolver#notifyChange(Uri, ContentObserver) notifyChange()}
-     * after inserting.
+     * * after inserting.
      * This method can be called from multiple threads, as described in
      * <a href="{@docRoot}guide/topics/fundamentals/processes-and-threads.html#Threads">Processes
      * and Threads</a>.
@@ -264,7 +261,6 @@ public class PacienteContentProvider extends android.content.ContentProvider {
      * Implement this to handle requests to delete one or more rows.
      * The implementation should apply the selection clause when performing
      * deletion, allowing the operation to affect multiple rows in a directory.
-     * As a courtesy, call {@link ContentResolver#notifyChange(Uri, ContentObserver) notifyChange()}
      * after deleting.
      * This method can be called from multiple threads, as described in
      * <a href="{@docRoot}guide/topics/fundamentals/processes-and-threads.html#Threads">Processes
@@ -294,7 +290,7 @@ public class PacienteContentProvider extends android.content.ContentProvider {
             case URI_ID_PACIENTES:
                 return new BdTabelPaciente(bd).delete(BdTabelPaciente._ID + "=?", new String[]{id});
 
-            case URI_ID_SUSPEITOS:
+           case URI_ID_SUSPEITOS:
                 return new BdTableSuspeitos(bd).delete(BdTableSuspeitos._ID + "=?", new String[]{id});
 
             default:
@@ -306,7 +302,6 @@ public class PacienteContentProvider extends android.content.ContentProvider {
      * Implement this to handle requests to update one or more rows.
      * The implementation should update all rows matching the selection
      * to set the columns according to the provided values map.
-     * As a courtesy, call {@link ContentResolver#notifyChange(Uri, ContentObserver) notifyChange()}
      * after updating.
      * This method can be called from multiple threads, as described in
      * <a href="{@docRoot}guide/topics/fundamentals/processes-and-threads.html#Threads">Processes

@@ -9,9 +9,17 @@ import androidx.annotation.Nullable;
 public class BdPacienteOpenHelper extends SQLiteOpenHelper {
     public static final String NOME_BASE_DADOS = "paciente.db";
     private static final int VERSAO_BASE_DADOS = 1;
-    private static final boolean DESENVOLVIMENTO = true;
+    private static final boolean DESENVOLVIMENTO = false;
     private final Context context;
 
+    /**
+     * Create a helper object to create, open, and/or manage a database.
+     * This method always returns very quickly.  The database is not actually
+     * created or opened until one of {@link #getWritableDatabase} or
+     * {@link #getReadableDatabase} is called.
+     *  @param context to use for locating paths to the the database
+     *
+     */
     public BdPacienteOpenHelper(@Nullable Context context){
         super(context,NOME_BASE_DADOS, null, VERSAO_BASE_DADOS);
         this.context = context;
@@ -26,7 +34,7 @@ public class BdPacienteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         BdTabelPaciente tabelaPaciente = new BdTabelPaciente(db);
-        tabelaPaciente.cria();
+        tabelaPaciente.criar();
 
         BdTableDistrito tabelaDistrito = new BdTableDistrito(db);
         tabelaDistrito.cria();
@@ -54,11 +62,11 @@ public class BdPacienteOpenHelper extends SQLiteOpenHelper {
         long idGuarda = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         Paciente paciente = new Paciente();
-        paciente.setNomePaciente("Francisco Marques");
-        paciente.setAno("2000");
-        paciente.setGenero("Masculino");
-        paciente.setIdDistrito(idGuarda);
-        paciente.setEstado("Recuperado");
+        paciente.setNome_paciente("Francisco Marques");
+        paciente.setAno_nascimento_paciente("2000");
+        paciente.setGenero_paciente("Masculino");
+        paciente.setId_distrito(idGuarda);
+        paciente.setEstado_paciente("Recuperado");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
 
         distrito = new Distrito();
@@ -70,11 +78,11 @@ public class BdPacienteOpenHelper extends SQLiteOpenHelper {
         long idLisboa = tabelaDistrito.insert(Converte.distritoToContentValues(distrito));
 
         paciente = new Paciente();
-        paciente.setNomePaciente("Miguel");
-        paciente.setAno("1999");
-        paciente.setGenero("Masculino");
-        paciente.setIdDistrito(idLisboa);
-        paciente.setEstado("Morto");
+        paciente.setNome_paciente("Miguel");
+        paciente.setAno_nascimento_paciente("1999");
+        paciente.setGenero_paciente("Masculino");
+        paciente.setId_distrito(idLisboa);
+        paciente.setEstado_paciente("Morto");
         tabelaPaciente.insert(Converte.pacienteToContentValues(paciente));
     }
 

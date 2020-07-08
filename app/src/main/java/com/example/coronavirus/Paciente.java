@@ -2,11 +2,11 @@ package com.example.coronavirus;
 
 public class Paciente {
     private long id = -1;
-    private String nomePaciente;
-    private String Ano;
-    private String genero;
-    private long idDistrito;
-    private String estado;
+    private String nome_paciente;
+    private String ano_nascimento_paciente;
+    private String genero_paciente;
+    private long id_distrito;
+    private String estado_paciente;
 
     public long getId() {
         return id;
@@ -16,43 +16,43 @@ public class Paciente {
         this.id = id;
     }
 
-    public String getNomePaciente() {
-        return nomePaciente;
+    public String getNome_paciente() {
+        return nome_paciente;
     }
 
-    public void setNomePaciente(String nomePaciente) {
-        this.nomePaciente = nomePaciente;
+    public void setNome_paciente(String nome_paciente) {
+        this.nome_paciente = nome_paciente;
     }
 
-    public String getAno() {
-        return Ano;
+    public String getAno_nascimento_paciente() {
+        return ano_nascimento_paciente;
     }
 
-    public void setAno(String ano) {
-        Ano = ano;
+    public void setAno_nascimento_paciente(String ano_nascimento_paciente) {
+        this.ano_nascimento_paciente = ano_nascimento_paciente;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getGenero_paciente() {
+        return genero_paciente;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setGenero_paciente(String genero_paciente) {
+        this.genero_paciente = genero_paciente;
     }
 
-    public long getIdDistrito() {
-        return idDistrito;
+    public long getId_distrito() {
+        return id_distrito;
     }
 
-    public void setIdDistrito(long idDistrito) {
-        this.idDistrito = idDistrito;
+    public void setId_distrito(long id_distrito) {
+        this.id_distrito = id_distrito;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstado_paciente() {
+        return estado_paciente;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstado_paciente(String estado_paciente) {
+        this.estado_paciente = estado_paciente;
     }
 }

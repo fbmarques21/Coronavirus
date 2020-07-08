@@ -6,33 +6,33 @@ import android.database.Cursor;
 public class Converte {
     public static ContentValues pacienteToContentValues(Paciente paciente) {
         ContentValues valores = new ContentValues();
-        valores.put(BdTabelPaciente.NOME_PACIENTE, paciente.getNomePaciente());
-        valores.put(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE, paciente.getAno());
-        valores.put(BdTabelPaciente.GENERO_PACIENTE, paciente.getGenero());
-        valores.put(BdTabelPaciente.CAMPO_ID_DISTRITO, paciente.getIdDistrito());
-        valores.put(BdTabelPaciente.ESTADO_PACIENTE, paciente.getEstado());
+        valores.put(BdTabelPaciente.NOME_PACIENTE, paciente.getNome_paciente());
+        valores.put(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE, paciente.getAno_nascimento_paciente());
+        valores.put(BdTabelPaciente.GENERO_PACIENTE, paciente.getGenero_paciente());
+        valores.put(BdTabelPaciente.CAMPO_ID_DISTRITO, paciente.getId_distrito());
+        valores.put(BdTabelPaciente.ESTADO_PACIENTE, paciente.getEstado_paciente());
         return valores;
     }
 
     public static Paciente contentValuesToPaciente(ContentValues valores) {
         Paciente paciente = new Paciente();
         paciente.setId(valores.getAsLong(BdTabelPaciente._ID));
-        paciente.setNomePaciente(valores.getAsString(BdTabelPaciente.NOME_PACIENTE));
-        paciente.setAno(valores.getAsString(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE));
-        paciente.setGenero(valores.getAsString(BdTabelPaciente.GENERO_PACIENTE));
-        paciente.setIdDistrito(valores.getAsLong(BdTabelPaciente.CAMPO_ID_DISTRITO));
-        paciente.setEstado(valores.getAsString(BdTabelPaciente.ESTADO_PACIENTE));
+        paciente.setNome_paciente(valores.getAsString(BdTabelPaciente.NOME_PACIENTE));
+        paciente.setAno_nascimento_paciente(valores.getAsString(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE));
+        paciente.setGenero_paciente(valores.getAsString(BdTabelPaciente.GENERO_PACIENTE));
+        paciente.setId_distrito(valores.getAsLong(BdTabelPaciente.CAMPO_ID_DISTRITO));
+        paciente.setEstado_paciente(valores.getAsString(BdTabelPaciente.ESTADO_PACIENTE));
         return paciente;
     }
 
     public static Paciente cursorToPaciente(Cursor cursor) {
         Paciente paciente = new Paciente();
         paciente.setId(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente._ID)));
-        paciente.setNomePaciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.NOME_PACIENTE)));
-        paciente.setAno(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE)));
-        paciente.setGenero(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.GENERO_PACIENTE)));
-        paciente.setIdDistrito(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_DISTRITO)));
-        paciente.setEstado(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.ESTADO_PACIENTE)));
+        paciente.setNome_paciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.NOME_PACIENTE)));
+        paciente.setAno_nascimento_paciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.ANO_NASCIMENTO_PACIENTE)));
+        paciente.setGenero_paciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.GENERO_PACIENTE)));
+        paciente.setId_distrito(cursor.getLong(cursor.getColumnIndex(BdTabelPaciente.CAMPO_ID_DISTRITO)));
+        paciente.setEstado_paciente(cursor.getString(cursor.getColumnIndex(BdTabelPaciente.ESTADO_PACIENTE)));
         return paciente;
     }
 
