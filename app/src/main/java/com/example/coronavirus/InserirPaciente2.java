@@ -13,15 +13,19 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import android.os.Bundle;
+import android.widget.Toast;
 
 public class InserirPaciente2<adapter> extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private Spinner spinnerDistrito;
@@ -81,12 +85,17 @@ public class InserirPaciente2<adapter> extends AppCompatActivity implements Load
         else if ((ano.length() != 4)) {
             TextEditAno.setError(getString(R.string.campo_obrigatorio));
             TextEditAno.requestFocus();
+
+        }
+        else if ((ano.length() > 1900) && (ano.length()<2020)) {
+            TextEditAno.setError(getString(R.string.campo_entre));
+            TextEditAno.requestFocus();
         }else {
             long idDistrito = spinnerDistrito.getSelectedItemId();
 
             Paciente paciente = new Paciente();
             paciente.setNome_paciente(nome);
-            paciente.setAno_nascimento_paciente("data");
+            paciente.setAno_nascimento_paciente(ano);
             paciente.setGenero_paciente(genero);
             paciente.setId_distrito(idDistrito);
             paciente.setEstado_paciente(estado);

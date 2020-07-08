@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class BdPacienteOpenHelper extends SQLiteOpenHelper {
     public static final String NOME_BASE_DADOS = "paciente.db";
-    private static final int VERSAO_BASE_DADOS = 1;
+    private static final int VERSAO_BASE_DADOS = 2;
     private static final boolean DESENVOLVIMENTO = false;
     private final Context context;
 

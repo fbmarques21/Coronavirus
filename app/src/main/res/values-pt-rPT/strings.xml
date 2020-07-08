@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Coronavirus</string>
-    <string name="inserir_Nome">Nome</string>
-    <string name="inserir_Datadenascimento">Ano de Nascimento</string>
-    <string name="inserir_Paciente">Paciente</string>
+    <string name="inserir_Nome">Nome:</string>
+    <string name="inserir_Datadenascimento">Ano de Nascimento:</string>
+    <string name="inserir">Guardar</string>
     <string name="inserir_Suspeito">Suspeito</string>
-    <string name="consultar_Dados">Dados</string>
+    <string name="consultar_Dados">Estatísticas</string>
     <string name="text_Paciente">Inserir Paciente:</string>
     <string name="texto_Suspeitos">Inserir Suspeito:</string>
-    <string name="texto_Consultar">Consultar dados de Portugal:</string>
+    <string name="texto_Consultar">Consultar Estatisticas de Portugal:</string>
     <string name="texto_Sexo">Género:</string>
     <string name="texto_Distrito">Distrito:</string>
     <string name="texto_Estado">Estado:</string>
@@ -19,4 +19,11 @@
     <string name="EstadoInfetado">Infetado</string>
     <string name="EstadoMorto">Morto</string>
     <string name="EstadoRecuperado">Recuperado</string>
+    <string name="mostrar_paciente">Mostrar Paciente</string>
+    <string name="mostrar_suspeito">Mostrar Suspeito</string>
+    <string name="mostrar">Mostrar</string>
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Apagar</string>
+    <string name="editar">Editar</string>
+    <string name="campo_entre">Entre 1900 e 2000</string>
 </resources>

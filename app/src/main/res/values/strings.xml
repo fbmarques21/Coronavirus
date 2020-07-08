@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Coronavirus</string>
-    <string name="inserir_Nome">Name</string>
-    <string name="inserir_Datadenascimento">Year Of Birth</string>
-    <string name="inserir_Paciente">Patient</string>
+    <string name="inserir_Nome">Name:</string>
+    <string name="inserir_Datadenascimento">Year Of Birth:</string>
+    <string name="inserir">Insert</string>
     <string name="inserir_Suspeito">Suspect</string>
-    <string name="consultar_Dados">Data</string>
+    <string name="consultar_Dados">Stats</string>
     <string name="text_Paciente">Insert Patient:</string>
     <string name="texto_Suspeitos">Insert Suspect:</string>
-    <string name="texto_Consultar">Consult data from Portugal:</string>
+    <string name="texto_Consultar">Portugal Stats:</string>
     <string name="texto_Sexo">Gender:</string>
     <string name="texto_Distrito">District:</string>
     <string name="texto_Estado">State:</string>
@@ -36,4 +36,11 @@
     <string name="EstadoInfetado">Infected</string>
     <string name="EstadoMorto">Death</string>
     <string name="EstadoRecuperado">Recovered</string>
+    <string name="mostrar_paciente">Show Patient</string>
+    <string name="mostrar_suspeito">Show Suspect</string>
+    <string name="mostrar">Show</string>
+    <string name="guardar">Save</string>
+    <string name="eliminar">Delete</string>
+    <string name="editar">Edit</string>
+    <string name="campo_entre">Between 1900 and 2020</string>
 </resources>

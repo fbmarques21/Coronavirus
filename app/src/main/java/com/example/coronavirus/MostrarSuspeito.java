@@ -1,21 +1,31 @@
 package com.example.coronavirus;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Bundle;
 
 public class MostrarSuspeito extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String ID_SUSPEITO = "ID_SUSPEITO";
@@ -51,7 +61,6 @@ public class MostrarSuspeito extends AppCompatActivity implements LoaderManager.
         getSupportLoaderManager().restartLoader(ID_CURSOR_LOADER_SUSPEITO,null,this);
         super.onResume();
     }
-
     /**
      * Instantiate and return a new Loader for the given ID.
      *

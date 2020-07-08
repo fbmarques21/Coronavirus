@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
+
 import java.util.Arrays;
 
 public class BdTabelPaciente implements BaseColumns {
@@ -20,8 +21,8 @@ public class BdTabelPaciente implements BaseColumns {
     public static final String NOME_PACIENTE_COMPLETO = NOME_TABELA_PACIENTE + "." + NOME_PACIENTE;
     public static final String ANO_NASCIMENTO_PACIENTE_COMPLETO = NOME_TABELA_PACIENTE + "." + ANO_NASCIMENTO_PACIENTE;
     public static final String GENERO_PACIENTE_COMPLETO = NOME_TABELA_PACIENTE + "." + GENERO_PACIENTE;
-    public static final String CAMPO_ID_DISTRITO_COMPLETO = NOME_PACIENTE + "." + CAMPO_ID_DISTRITO;
-    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.NOME_DISTRITO + " AS " + DISTRITO_PACIENTE;
+    public static final String CAMPO_ID_DISTRITO_COMPLETO = NOME_TABELA_PACIENTE + "." + CAMPO_ID_DISTRITO;
+    public static final String CAMPO_DISTRITO_COMPLETO = BdTableDistrito.NOME_TABELA_DISTRITO + "." + BdTableDistrito.NOME_DISTRITO;
     public static final String ESTADO_PACIENTE_COMPLETO = NOME_TABELA_PACIENTE + "." + ESTADO_PACIENTE;
 
     public static final String[] TODOS_CAMPOS_PACIENTE = {CAMPO_ID_COMPLETO, NOME_PACIENTE_COMPLETO, ANO_NASCIMENTO_PACIENTE_COMPLETO, GENERO_PACIENTE_COMPLETO, CAMPO_ID_DISTRITO_COMPLETO,

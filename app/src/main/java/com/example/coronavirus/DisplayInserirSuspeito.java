@@ -70,12 +70,17 @@ public class DisplayInserirSuspeito extends AppCompatActivity implements LoaderM
         else if ((ano.length() != 4)) {
             TextEditAno.setError(getString(R.string.campo_obrigatorio));
             TextEditAno.requestFocus();
-        }else {
+        }
+        else if ((ano.length() > 1900) && (ano.length()<2020)) {
+            TextEditAno.setError(getString(R.string.campo_entre));
+            TextEditAno.requestFocus();
+        }
+        else {
             long idDistrito = spinnerDistrito.getSelectedItemId();
 
             Suspeito suspeito = new Suspeito();
             suspeito.setNomeSuspeito(nome);
-            suspeito.setAno("data");
+            suspeito.setAno(ano);
             suspeito.setGenero(genero);
             suspeito.setIdDistrito(idDistrito);
             try {
