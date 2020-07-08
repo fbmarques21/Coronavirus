@@ -40,7 +40,7 @@ public class BdPacienteOpenHelper extends SQLiteOpenHelper {
         tabelaDistrito.cria();
 
         BdTableSuspeitos tabelaSuspeitos = new BdTableSuspeitos(db);
-        tabelaDistrito.cria();
+        tabelaSuspeitos.cria();
 
         inserirDistrito(tabelaDistrito);
 

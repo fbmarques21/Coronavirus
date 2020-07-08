@@ -31,9 +31,9 @@ public class BdTableDistrito implements BaseColumns {
         db.execSQL("CREATE TABLE " + NOME_TABELA_DISTRITO + "(" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 NOME_DISTRITO + " TEXT NOT NULL," +
-                NR_INFETADOS_DISTRITO + " INTEGER NOT NULL," +
-                NR_RECUPERADOS_DISTRITO +  " INTEGER NOT NULL," +
-                NR_MORTOS_DISTRITO + " INTEGER NOT NULL," +
+                NR_INFETADOS_DISTRITO + " INTEGER DEFAULT 0," +
+                NR_RECUPERADOS_DISTRITO +  " INTEGER DEFAULT 0," +
+                NR_MORTOS_DISTRITO + " INTEGER DEFAULT 0," +
                 NR_HABITANTES_DISTRITO + " INTEGER NOT NULL" +
                 ")");
     }
