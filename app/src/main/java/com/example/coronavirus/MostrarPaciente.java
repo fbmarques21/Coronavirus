@@ -6,16 +6,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MostrarPaciente extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String ID_PACIENTE = "ID_PACIENTE";
@@ -24,6 +36,9 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
     private RecyclerView recyclerViewPaciente;
 
     private Paciente paciente = null;
+    private Context context;
+    private Context activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,5 +140,9 @@ public class MostrarPaciente extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adaptadorPaciente.setCursor(null);
+    }
+
+
+    public void eliminarPaciente(View view) {
     }
 }

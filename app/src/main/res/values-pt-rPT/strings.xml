@@ -26,4 +26,5 @@
     <string name="eliminar">Apagar</string>
     <string name="editar">Editar</string>
     <string name="campo_entre">Entre 1900 e 2000</string>
+    <string name="campo_quatro_numeros">O campo só pode ter quatro números</string>
 </resources>

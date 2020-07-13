@@ -83,14 +83,13 @@ public class InserirPaciente2<adapter> extends AppCompatActivity implements Load
             return;
         }
         else if ((ano.length() != 4)) {
-            TextEditAno.setError(getString(R.string.campo_obrigatorio));
+            TextEditAno.setError(getString(R.string.campo_quatro_numeros));
             TextEditAno.requestFocus();
-
-        }
-        else if ((ano.length() > 1900) && (ano.length()<2020)) {
+        }else if ((ano.length() < 1900) || (ano.length()>2020)) {
             TextEditAno.setError(getString(R.string.campo_entre));
             TextEditAno.requestFocus();
-        }else {
+        }
+        else {
             long idDistrito = spinnerDistrito.getSelectedItemId();
 
             Paciente paciente = new Paciente();
