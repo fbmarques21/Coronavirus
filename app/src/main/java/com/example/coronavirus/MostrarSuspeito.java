@@ -7,6 +7,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import androidx.navigation.NavController;
+import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -149,16 +150,19 @@ public class MostrarSuspeito extends AppCompatActivity implements LoaderManager.
 
     public void eliminarSuspeito(View view) {
         try {
-            Uri enderecoLivro = Uri.withAppendedPath(PacienteContentProvider.ENDERECO_SUSPEITOS, String.valueOf(suspeito.getId()));
+            Uri enderecoSuspeito = Uri.withAppendedPath(PacienteContentProvider.ENDERECO_SUSPEITOS, String.valueOf(suspeito.getId()));
 
-            SQLiteDatabase db = openOrCreateDatabase("suspeito.db", Context.MODE_PRIVATE, null);
-            db.delete("suspeito", "id=?", new String[] {String.valueOf(enderecoLivro)});
-            db.close();
-            Toast.makeText(getApplicationContext(), "Suspeito eliminado com sucesso", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), MostrarSuspeito.class));
+            int apagados = getParent().getContentResolver().delete(enderecoSuspeito, null, null);
+
+            if (apagados == 1) {
+                Toast.makeText(getApplicationContext(), "Suspeito eliminado com sucesso", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), MostrarSuspeito.class));
+                return;
+            }
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Erro ao eliminar", Toast.LENGTH_SHORT).show();
         }
+
+        Toast.makeText(getApplicationContext(), R.string.campo_erro , Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -85,10 +85,10 @@ public class InserirPaciente2<adapter> extends AppCompatActivity implements Load
         else if ((ano.length() != 4)) {
             TextEditAno.setError(getString(R.string.campo_quatro_numeros));
             TextEditAno.requestFocus();
-        }else if ((ano.length() < 1900) || (ano.length()>2020)) {
+        }/*else if ((ano.length() < 1900) || (ano.length()>2020)) {
             TextEditAno.setError(getString(R.string.campo_entre));
             TextEditAno.requestFocus();
-        }
+        }*/
         else {
             long idDistrito = spinnerDistrito.getSelectedItemId();
 
